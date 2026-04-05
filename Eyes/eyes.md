@@ -66,33 +66,35 @@ Vi lägger till kod så att avståndet mellan ögats mitt och muspekaren visas, 
 
 ✏️ **Mata in** och testkör koden\!
 
-Koden så här långt – nya rader är markerade:
+Koden så här långt – nya rader är markerade.
+- **+** är en ny eller ändrad rad. Mata *inte* in plustecknet
+- **&ndash;** är en borttagen rad. Mata *inte* in minustecknet
 
-```javascript
-function setup() {
-  createCanvas(530, 400);
-}
+```diff
+ function setup() {
+   createCanvas(530, 400);
+ }
 
-function draw() {
-  background(0);
+ function draw() {
+   background(0);
 
-  let mouseXPos = mouseX; // nyrad 👀
-  let mouseYPos = mouseY; // nyrad 👀
-  let eyeX = 200; // nyrad 👀
-  let eyeY = 200; // nyrad 👀
++  let mouseXPos = mouseX;
++  let mouseYPos = mouseY;
++  let eyeX = 200;
++  let eyeY = 200;
 
-  let distanceX = mouseXPos - eyeX; // nyrad 👀
-  let distanceY = mouseYPos - eyeY; // nyrad 👀
++  let distanceX = mouseXPos - eyeX;
++  let distanceY = mouseYPos - eyeY;
 
-  fill(255);
-  circle(eyeX, eyeY, 100); // lite ändrad 👀
+   fill(255);
++  circle(eyeX, eyeY, 100);
   
-  fill(0, 0, 100);
-  circle(200, 200, 30);
+   fill(0, 0, 100);
+   circle(200, 200, 30);
 
-  fill(255);
-  text(`distance x: ${distanceX}\ndistance y: ${distanceY}`, 10, 20); // nyrad 👀
-}
+   fill(255);
+   text(`distance x: ${distanceX}\ndistance y: ${distanceY}`, 10, 20); // nyrad 👀
+ }
 ```
 
 Så här ser det ut när jag testkör. Fungerar det inte? Kolla koden igen.
@@ -110,32 +112,32 @@ Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pix
 
 :pencil2: **Uppdatera koden** och testkör den\!
 
-```javascript
-function setup() {
-  createCanvas(530, 400);
-}
+```diff
+ function setup() {
+   createCanvas(530, 400);
+ }
 
-function draw() {
-  background(0);
+ function draw() {
+   background(0);
 
-  let mouseXPos = mouseX;
-  let mouseYPos = mouseY;
-  let eyeX = 200;
-  let eyeY = 200;
+   let mouseXPos = mouseX;
+   let mouseYPos = mouseY;
+   let eyeX = 200;
+   let eyeY = 200;
 
-  let distanceX = mouseXPos - eyeX;
-  let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // nyrad 👀
+   let distanceX = mouseXPos - eyeX;
+   let distanceY = mouseYPos - eyeY;
++  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-  fill(255);
-  circle(eyeX, eyeY, 100);
+   fill(255);
+   circle(eyeX, eyeY, 100);
   
-  fill(0, 0, 100);
-  circle(200, 200, 30);
+   fill(0, 0, 100);
+   circle(200, 200, 30);
 
-  fill(255);
-  text(`distance x: ${distanceX}\ndistance y: ${distanceY}\ndistance: ${distance}`, 10, 20); // ändrad 👀
-}
+   fill(255);
++  text(`distance x: ${distanceX}\ndistance y: ${distanceY}\ndistance: ${distance}`, 10, 20);
+ }
 ```
 
 Verkar avståndet räknas ut rätt? Flytta muspekaren sakta och kolla.
@@ -148,29 +150,29 @@ Om muspekaren är innanför ögat är det lätt. Då kan vi sätta pupillen till
 
 Då kan koden för `draw()` se ut så här. Den övriga koden är samma som innan.
 
-```javascript
-// behåll resten av koden
+```diff
+ // behåll resten av koden
 
-function draw() { // funktionen är uppdaterad 👀
-  background(0);
+ function draw() { // funktionen är uppdaterad 👀
+   background(0);
 
-  let mouseXPos = mouseX;
-  let eyeX = 200;
-  let eyeY = 200;
+   let mouseXPos = mouseX;
+   let eyeX = 200;
+   let eyeY = 200;
 
-  let distanceX = mouseXPos - eyeX;
-  let distanceY = mouseY - eyeY;
-  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceX); // Pythagoras
+   let distanceX = mouseXPos - eyeX;
+   let distanceY = mouseY - eyeY;
+   let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceX); // Pythagoras
   
-  let pupilX = eyeX + distanceX; // nyrad 👀
-  let pupilY = eyeY + distanceY; // nyrad 👀
++  let pupilX = eyeX + distanceX;
++  let pupilY = eyeY + distanceY;
 
-  fill(255);
-  circle(eyeX, eyeY, 100);
+   fill(255);
+   circle(eyeX, eyeY, 100);
   
-  fill(0, 0, 100);
-  circle(pupilX, pupilY, 30); // nyrad 👀
-}
+   fill(0, 0, 100);
++  circle(pupilX, pupilY, 30);
+ }
 ```
 
 :pencil2: **Uppdatera och testa** din kod. Fungerar den bra när muspekaren är innanför ögats cirkel?
@@ -222,39 +224,39 @@ Om muspekaren är mer än 30 pixlar från ögats centrum, placerar vi pupillen i
 
 Så här kan `draw()` se ut nu:
 
-```javascript
-// behåll resten av koden
+```diff
+ // behåll resten av koden
 
-function draw() {
-  background(0);
+ function draw() {
+   background(0);
 
-  let mouseXPos = mouseX;
-  let mouseYPos = mouseY;
-  let maxRadius = 30; // nyrad 👀
-  let eyeX = 200;
-  let eyeY = 200;
+   let mouseXPos = mouseX;
+   let mouseYPos = mouseY;
++  let maxRadius = 30;
+   let eyeX = 200;
+   let eyeY = 200;
 
-  let distanceX = mouseXPos - eyeX;
-  let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // Pythagoras
+   let distanceX = mouseXPos - eyeX;
+   let distanceY = mouseYPos - eyeY;
+   let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // Pythagoras
   
-  let pupilX, pupilY; // nyrad 👀
++  let pupilX, pupilY;
 
-  if (distance < maxRadius) { // innanför ögat # ändrat 👀
-    pupilX = eyeX + distanceX; // ändrat 👀
-    pupilY = eyeY + distanceY; // ändrat 👀
-  } else { // utanför ögat # ändrat 👀
-    let scale = maxRadius / distance; // se bilden # ändrat 👀
-    pupilX = eyeX + distanceX * scale; // ändrat 👀
-    pupilY = eyeY + distanceY * scale; // ändrat 👀
-  }
++  if (distance < maxRadius) { // innanför ögat
++    pupilX = eyeX + distanceX;
++    pupilY = eyeY + distanceY;
++  } else { // utanför ögat
++    let scale = maxRadius / distance; // se bilden
++    pupilX = eyeX + distanceX * scale;
++    pupilY = eyeY + distanceY * scale;
++  }
 
-  fill(255);
-  circle(eyeX, eyeY, 100);
+   fill(255);
+   circle(eyeX, eyeY, 100);
   
-  fill(0, 0, 100);
-  circle(pupilX, pupilY, 30);
-}
+   fill(0, 0, 100);
+   circle(pupilX, pupilY, 30);
+ }
 ```
 
 :pencil2: **Uppdatera de markerade raderna och testa koden.** Fungerar den bra även när muspekaren är utanför ögats cirkel?
@@ -307,50 +309,50 @@ Därför lägger vi ögats kod i funktionen `drawEye` som har ögats koordinater
 
 Så här kan koden se ut nu:
 
-```javascript
-function setup() {
-  createCanvas(530, 400);
-}
+```diff
+ function setup() {
+   createCanvas(530, 400);
+ }
 
-function draw() {
-  background(0);
+ function draw() {
+   background(0);
 
-  drawEye(200, 200); // första ögat 👀
-  drawEye(330, 200); // andra ögat 👀
-}
++  drawEye(200, 200); // första ögat
++  drawEye(330, 200); // andra ögat
+ }
 
-function drawEye(eyeX, eyeY) { // ändrat 👀
-  let maxRadius = 30; // ändrat 👀
-  let mouseXPos = mouseX; 
-  let mouseYPos = mouseY;
++function drawEye(eyeX, eyeY) {
++  let maxRadius = 30;
+   let mouseXPos = mouseX; 
+   let mouseYPos = mouseY;
 
-  let distanceX = mouseXPos - eyeX; // ändrat 👀
-  let distanceY = mouseYPos - eyeY; // ändrat 👀
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // ändrat 👀
++  let distanceX = mouseXPos - eyeX;
++  let distanceY = mouseYPos - eyeY;
++  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
   
-  let pupilX, pupilY;
+   let pupilX, pupilY;
 
-  if (distance < maxRadius) { // ändrat 👀
-    pupilX = eyeX + distanceX; // ändrat 👀
-    pupilY = eyeY + distanceY; // ändrat 👀
-  } else { // ändrat 👀
-    let scale = maxRadius / distance; // ändrat 👀
-    pupilX = eyeX + distanceX * scale; // ändrat 👀
-    pupilY = eyeY + distanceY * scale; // ändrat 👀
-  }
++  if (distance < maxRadius) {
++    pupilX = eyeX + distanceX;
++    pupilY = eyeY + distanceY;
++  } else {
++    let scale = maxRadius / distance;
++    pupilX = eyeX + distanceX * scale;
++    pupilY = eyeY + distanceY * scale;
+   }
 
-  fill(255);
-  circle(eyeX, eyeY, 100); // ändrat 👀
-  fill(0, 0, 100);
-  circle(pupilX, pupilY, 30); // ändrat 👀
-}
+   fill(255);
++  circle(eyeX, eyeY, 100);
+   fill(0, 0, 100);
++  circle(pupilX, pupilY, 30);
+ }
 ```
 
 :pencil2: **Uppdatera de ändrade raderna och testa koden.** Följer båda ögonen muspekaren på rätt sätt?
 
 # Uppgifter
 
-## 1\. Utvärdera ert eget arbete\!
+## 1. Utvärdera ert eget arbete!
 
 När ni svarar på detta har ni ju *tillgång till uppgiften* – ni behöver alltså inte kunna koden utantill. Leta svar eller exempel från koden.
 
