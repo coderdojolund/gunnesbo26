@@ -4,6 +4,9 @@
 
 Vi vill göra en animering där ögonen följer muspekaren.
 
+- Koden kan vi skriva och köra i JavaScript direkt på hemsidan [p5.js](https://editor.p5.js)
+- [JavaScript](https://learnxinyminutes.com/javascript/) (ECMAscript) används på nästan alla webbsidor idag
+
 ## Jobba så här
 
 Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
