@@ -10,7 +10,6 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Blocks](#blocks-)
   &bull; [Fifteen](#fifteen-)
-  &bull; [Att flytta över från Scratch &ndash; Flappy Bird](#att-flytta-över-från-scratch--flappy-bird-)
   &bull; [Flowers](#flowers-)
   &bull; [Life](#life-)
   &bull; [Repeat](#repeat-)
