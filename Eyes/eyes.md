@@ -352,15 +352,15 @@ function drawEye(eyeX, eyeY) { // ändrat 👀
 
 ## 1\. Utvärdera ert eget arbete\!
 
-När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* – ni behöver alltså inte kunna koden utantill.
+När ni svarar på detta har ni ju *tillgång till uppgiften* – ni behöver alltså inte kunna koden utantill. Leta svar eller exempel från koden.
 
-**1A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för läraren eller inför klassen.
+**1A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för läraren eller för klassen.
 
 **1B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
 ## Uppgift 2
 
-Uträkningen av `scale` går att göra om så att vi får ännu färre kodrader. Just nu har vi en `if/else` där det är väldigt lite skillnad mellan de två kodblocken:
+Uträkningen av `scale` går att göra om så att vi får ännu färre kodrader. Just nu har vi en `if/else` där det är väldigt lite skillnad mellan de två olika uträkningarna:
 
 ```javascript
     if (distance < maxRadius) { 
