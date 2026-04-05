@@ -42,7 +42,7 @@ Projekten finns i Google Classroom.
 ## FIXAS: Eyes ⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
 ## FIXAS: Gem Catcher ⭐⭐
 
