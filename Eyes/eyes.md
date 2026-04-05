@@ -106,8 +106,6 @@ Avståndet, `distance`, kan vi räkna ut med Pythagoras sats. Se figuren.
 ![image](https://user-images.githubusercontent.com/4598641/224125785-ee2eedc9-2155-4508-9fc2-d8518bfdfe32.png)
 
 Avståndet i pixlar är roten ur (antalet pixlar i X-led i kvadrat + antalet pixlar i Y-led i kvadrat).
-
-  - Operatorn `** 2` betyder upphöjt till 2, alltså kvadraten.
   - Vi använder `Math.sqrt()` för att räkna ut kvadratroten.
 
 :pencil2: **Uppdatera koden** och testkör den\!
@@ -127,7 +125,7 @@ function draw() {
 
   let distanceX = mouseXPos - eyeX;
   let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // nyrad 👀
+  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // nyrad 👀
 
   fill(255);
   circle(eyeX, eyeY, 100);
@@ -162,7 +160,7 @@ function draw() { // funktionen är uppdaterad 👀
 
   let distanceX = mouseXPos - eyeX;
   let distanceY = mouseY - eyeY;
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagoras
+  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceX); // Pythagoras
   
   let pupilX = eyeX + distanceX; // nyrad 👀
   let pupilY = eyeY + distanceY; // nyrad 👀
@@ -195,7 +193,7 @@ function draw() {
 
   let distanceX = mouseXPos - eyeX;
   let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagoras
+  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // Pythagoras
   
   let pupilX = eyeX + distanceX; // nyrad 👀
   let pupilY = eyeY + distanceY; // nyrad 👀
@@ -238,7 +236,7 @@ function draw() {
 
   let distanceX = mouseXPos - eyeX;
   let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2); // Pythagoras
+  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY); // Pythagoras
   
   let pupilX, pupilY; // nyrad 👀
 
@@ -280,7 +278,7 @@ function draw() {
 
   let distanceX = mouseXPos - eyeX;
   let distanceY = mouseYPos - eyeY;
-  let distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+  let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
   let pupilX, pupilY;
 
