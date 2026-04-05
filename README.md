@@ -2,8 +2,6 @@
 
 Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i till [repl.it](https://replit.com/~). 
 
-Projektet från 2023 finns [här]([url](https://github.com/coderdojolund/gunnesbo8).
-
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*
 * **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
 * **Spel och animering:**
@@ -134,3 +132,5 @@ Använd knappen Close Sidebar uppe till vänster för att fälla in fillistan.
 4. Gör mer plats i Chrome genom att klicka på de tre prickarna högst uppe till höger. Välj sen kvadrat-ikonen (helskärm)<br>
 5.  ![image](https://user-images.githubusercontent.com/4598641/232329741-2b9f94c8-32b1-42a8-8246-85bec9c80328.png)
  
+# Källor
+- Projektet från 2023 finns [här](https://github.com/coderdojolund/gunnesbo8). Det använde repl.it.
