@@ -39,12 +39,12 @@ Textspel i Python kodar ni i [trinket.io](https://trinket.io/)
 
 Projekten finns i Google Classroom.
 
-## FIXAS: Eyes ⭐⭐
+## KOLLAS: Eyes ⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
-## FIXAS: Gem Catcher ⭐⭐
+## KOLLAS: Gem Catcher ⭐⭐
 
 [![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/gemgreen.png)](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md)
 
