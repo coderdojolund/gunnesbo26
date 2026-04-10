@@ -4,7 +4,8 @@
 
 ## Innehåll
 [Första koden](#första-koden) &bull;
-[Funktionen update()](#funktionen-update) &bull;
+[Figuren (Emoji)](#figuren-emoji) &bull;
+[Rörelse](#rörelse) &bull;
 [Lägga till en ädelsten](#lägga-till-en-ädelsten) &bull;
 [Kollision och random()](#kollision-och-random) &bull;
 [Räkna poäng](#räkna-poäng) &bull;
@@ -188,7 +189,6 @@ if (d < 40) { // Om avståndet är mindre än 40 pixlar
 Det är inte så spännande av låta ädelstenen falla från samma ställe varje gång.
 Funktionen `random` ger oss slumptal, ungefär som att kasta tärning.
 Här ska vi använda den för att slumpa fram ädelstenens x-position. Vi vill att den ska vara minst 20 och högst bredden&ndash;20
-```
 
 # Räkna poäng
 
