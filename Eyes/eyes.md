@@ -18,14 +18,14 @@ Var det något i beskrivningen som var svårt att förstå? Ta med det i redovis
 
 ## Innehåll
 
-[Rita ett öga](https://www.google.com/search?q=%23rita-ett-%C3%B6ga)
-• [Räkna ut avståndet i X- och Y-led mellan muspekaren och ögat](https://www.google.com/search?q=%23r%C3%A4kna-ut-avst%C3%A5ndet-i-x--och-y-led-mellan-muspekaren-och-%C3%B6gat)
-• [Räkna ut avståndet mellan muspekaren och ögat](https://www.google.com/search?q=%23r%C3%A4kna-ut-avst%C3%A5ndet-mellan-muspekaren-och-%C3%B6gat)
-• [Rörlig pupill](https://www.google.com/search?q=%23r%C3%B6rlig-pupill)
-• [Pupillen ska inte smita när muspekaren är utanför ögat](https://www.google.com/search?q=%23pupillen-ska-inte-smita-n%C3%A4r-muspekaren-%C3%A4r-utanf%C3%B6r-%C3%B6gat)
-• [Två ögon](https://www.google.com/search?q=%23tv%C3%A5-%C3%B6gon)
-• [Uppgifter](https://www.google.com/search?q=%23uppgifter)
-• [Källor](https://www.google.com/search?q=%23k%C3%A4llor)
+[Rita ett öga](#rita-ett-%C3%B6ga)
+• [Räkna ut avståndet i X- och Y-led mellan muspekaren och ögat](#r%C3%A4kna-ut-avst%C3%A5ndet-i-x--och-y-led-mellan-muspekaren-och-%C3%B6gat)
+• [Räkna ut avståndet mellan muspekaren och ögat](#r%C3%A4kna-ut-avst%C3%A5ndet-mellan-muspekaren-och-%C3%B6gat)
+• [Rörlig pupill](#r%C3%B6rlig-pupill)
+• [Pupillen ska inte smita när muspekaren är utanför ögat](#pupillen-ska-inte-smita-n%C3%A4r-muspekaren-%C3%A4r-utanf%C3%B6r-%C3%B6gat)
+• [Två ögon](#tv%C3%A5-%C3%B6gon)
+• [Uppgifter](#uppgifter)
+• [Källor](k%C3%A4llor)
 
 # Rita ett öga
 
