@@ -17,7 +17,7 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   &bull; [Sokoban](#sokoban-)
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
 &bull;
-[FIXAS: Hur får jag mer plats på skärmen?](https://github.com/coderdojolund/Python-8/edit/main/README.md#hur-f%C3%A5r-jag-ett-st%C3%B6rre-spelf%C3%B6nster)
+[FIXAS: Hur får jag mer plats på skärmen?](https://github.com/coderdojolund/gunnesbo26/edit/main/README.md#hur-f%C3%A5r-jag-ett-st%C3%B6rre-spelf%C3%B6nster)
 &bull;
 [FIXAS: Hur kan jag spara highscore i en fil?](https://replit.com/@RobertStorlind/highscore-exempel#main.py)
 
@@ -39,39 +39,39 @@ Textspel i Python kodar ni i [trinket.io](https://trinket.io/)
 
 Projekten finns i Google Classroom.
 
-## KOLLAS: Eyes ⭐⭐
+## Eyes ⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
-## KOLLAS: Gem Catcher ⭐⭐
+## Gem Catcher ⭐⭐
 
 [![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/gemgreen.png)](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md
 
-##  FIXAS: Ninja Runner ⭐⭐
+## Ninja Runner ⭐⭐
 
 [![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__004.png)](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.md
 
 ## OM VI HINNER: Blocks ⭐⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)](https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md))
 
-https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Blocks/blocks.md
 
 ## OM VI HINNER: Fifteen ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md))
 
-https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Fifteen/fifteen.md
 
 ## OM VI HINNER: Flowers ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226452466-c09472f6-9f75-435b-b7c3-9bda65238539.png)](https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md
 
 ## Hur många dagar fyller du? ⭐⭐⭐
 
@@ -79,32 +79,32 @@ https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md
 
 Pythonprojekt som du kodar i [trinket.io](https://trinket.io/)
 
-https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Dagar/dagar.md
 
 ## OM VI HINNER:  Life ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/225745694-931e3ac9-aa8e-4931-bf60-b673bd7f5536.png)](https://github.com/coderdojolund/Python-8/blob/main/Life/life.md) 
 
-https://github.com/coderdojolund/Python-8/blob/main/Life/life.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Life/life.md
 
 ## OM VI HINNER: Repeat ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/225746247-eb970a66-98e9-4352-85c4-eed3690745fb.png)](https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Repeat/repeat.md
 
 
-## FIXAS: Snake ⭐⭐⭐
+## Snake ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 
 ## OM VI HINNER:  Sokoban ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438553-be7f0fc4-19b6-43b1-86ba-cc869b76dab4.png)](https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md)
 
-https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md
+https://github.com/coderdojolund/gunnesbo26/blob/main/Sokoban/sokoban.md
 
 
 # Var hittar jag symbolerna på tangentbordet?
