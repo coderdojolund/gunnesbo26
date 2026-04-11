@@ -13,7 +13,7 @@
 
 Ett spel av typen Infinite/Endless Runner tar aldrig slut. Målet är att överleva så långt som möjligt och ju längre, desto högre poäng får du.
 
-För att göra vårt spel ska vi använda vad vi lärt oss från spelet [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) och lägga till
+För att göra vårt spel ska vi använda vad vi lärt oss från spelet [Gem Catcher](https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md) och lägga till
 - ritning
 - animering
 - fysik
@@ -31,7 +31,7 @@ Gå till https://editor.p5.js och ta bort exempelkoden.
 
 # Bakgrund
 ## Första steget
-Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) börjar vi koda vårt spel genom att sätta grafikfönstrets bredd och höjd.
+Precis som i [Gem Catcher](https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md) börjar vi koda vårt spel genom att sätta grafikfönstrets bredd och höjd.
 
 ```javascript
 function setup() {
@@ -459,8 +459,7 @@ function draw() {
     runnerY = height - 200; // stanna på marken
   } 
   
-  // --- NYTT: Animeringslogik ---
-  
+  // Animeringslogik ---
   // Vi ritar figuren på skärmen.
   // Vi använder frameCount för att räkna ut vilken emoji som ska visas.
   
@@ -483,50 +482,64 @@ function draw() {
 
 ## Poängen
 
-Precis som i [Gem Catcher](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md), använder vi en variabel `score` för att hålla reda på  poängställningen.
+Precis som i [Gem Catcher](https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md), använder vi en variabel `score` för att hålla reda på  poängställningen.
 
-✏️ Uppdatera koden.
-```python
-score = 0
+✏️ Skapa poäng-variabeln. Lägg till den högst upp i din kod, där du har dina andra variabler:
+
+```javascript
+let score = 0;
 ```
-✏️ Vi ökar poängen varje gång ett hinder försvinner ut åt vänster. Ändra det här inuti `update()`, från
-```python
-  for actor in obstacles:
-    actor.x -= 8
-```
-… till detta:
-```python
-  for actor in obstacles:
-    actor.x -= 8
-    if actor.x < -50:
-      obstacles.remove(actor)
-      score += 1
+
+✏️ Öka poängen när hinder passeras. Vi vill öka poängen varje gång ett hinder försvinner ut åt vänster. För att kunna ta bort saker ur en lista på ett bra sätt i JavaScript använder vi en for-loop som räknar nedåt.
+
+Hitta stället i `draw()` där du flyttar hindren `(obs.x -= 8)` och uppdatera den så här:
+
+```javascript
+// Gå igenom listan baklänges för att kunna ta bort hinder
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    let obs = obstacles[i];
+    obs.x -= 8; // Flytta hindret
+
+    // Om hindret lämnar skärmen (-50)
+    if (obs.x < -50) {
+      obstacles.splice(i, 1); // Ta bort hindret ur listan
+      score += 1;             // Ge poäng
+    }
+  }
 ```
 Detta är vad raderna betyder:
+- `obstacles.length - 1`: Vi börjar titta på det sista hindret i listan.
+- `obstacles.splice(i, 1)`: Detta tar bort exakt 1 sak vid position i. Det är JavaScripts sätt att göra remove().
+- `score += 1`: Ökar poängen med 1.
 
-`if actor.x < -50` : När x-koordinaten är mindre än &ndash;50 är figuren förmodligen utanför skärmen. Då kommer vi att …
-
-`obstacles.remove(actor)` : ta bort figuren från listan `obstacles` och sen
-
-`score += 1` : öka poängen med 1. Kom ihåg att deklarera `score` som global variabel!
 
 ✏️ Testkör!
 
-## Rita hinder och skriva ut poängen
-Hindren ritas inte om vi glömmer att göra det i `draw()`. 
+## Skriv ut poängen
+För att vi ska se hur bra(?) det går ska vi skriva ut poängen i spelfönstret.
 
-✏️ Vi lägger till detta:
-```python
-for actor in obstacles:
-  actor.draw()
+✏️ Skriv ut poängen. Lägg till detta längst ner i draw()-funktionen:
+```javascript
+// Skriv ut poängen
+  fill(0); // Svart färg
+  textSize(30);
+  textAlign(LEFT, TOP); // Gör så att texten börjar uppe till vänster
+  text("Score: " + score, 20, 20);
+  
+  // Återställ textinställningar för ninjan
+  textAlign(CENTER, CENTER);
+  textSize(emojiSize);
 ```
-Det går igenom listan med hinder och ritar dem ett i taget.
 
-✏️ Vi behöver också visa poängen på skärmen så här:
-```python
-screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
-```
-✏️ Ändra gärna färg, placering eller teckenstorleken.
+### Varför ändrar vi `textAlign`?
+I början av koden satte vi `textAlign(CENTER, CENTER)` för att ninjan skulle ritas snyggt.
+Om vi inte ändrar tillbaka till LEFT för poängen, kommer texten "Score" att hamna halvvägs utanför skärmen.
+
+✏️ Testkör!
+
+Nu ska du få poäng varje gång du hoppar över en kaktus och den försvinner ut till vänster. 🌵✨
+
+>Utmaning: Kan du ändra färgen på poängtexten så den syns bättre mot himlen? Testa att ändra siffrorna i `fill()`.
 
 
 # Game Over
@@ -649,7 +662,7 @@ Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren 
 Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
 
 ## Uppgift 3: Utvärdera ert eget arbete!
-När ni svarar på detta, tänk er att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
+När ni svarar på detta, tänk på att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
 
 **3A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
 
