@@ -191,47 +191,56 @@ runnerY = HEIGHT - 200
 
 ## Fysik
 
-Vilken av de här ser mest realistisk ut?
+Vilken av de här ser mest verklig ut?
 
 ![image](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/jump.gif)
 
 I verkliga livet påverkas föremål av gravitationen. För att få vår ninja att hoppa realistiskt, behöver vi simulera gravitationens effekter i vårt spel.
 
-✏️ Vi börjar med att lägga till variabler för `velocity_y` och `gravity`, alltså hastigheten i y-led och gravitationen.
+✏️ Vi börjar med att lägga till variabler för `velocityY` och `gravity`, alltså hastigheten i y-led och gravitationen.
 
-```python
-velocity_y = 0
-gravity = 1
+```javascript
+// lägg till som nya ninja-variabler
+let velocityY = 0;
+let gravity = 1;
 ```
 
 Förklaring av kodraderna:
+- `velocityY = 0` : Håller reda på hur snabbt ninjan ska röra sig uppåt eller neråt. Hastigheten börjar med 0 eftersom ninjan inte hoppar än.
+- `gravity = 1` : Gravitationen påverkar hastigheten. Vi kan ändra detta senare och se effekten av det, men just nu låter vi värdet vara 1. Enheten är pixlar per tid i kvadrat. 
 
-`velocity_y = 0` : Håller reda på hur snabbt ninjan ska röra sig uppåt eller neråt. Hastigheten börjar med 0 eftersom ninjan inte hoppar än.
+✏️ I `keyPressed()` ska vi sen ändra hastigheten när uppåtpilen trycks ner.
 
-`gravity = 1` : Gravitationen påverkar hastigheten. Vi kan ändra detta senare och se effekten av det, men just nu låter vi värdet vara 1. 
+```javascript
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    velocityY = -15;
+  }
+}
+```
 
-✏️ I `update()` ska vi sen ändra hastigheten när uppåtpilen trycks ner.
+Sista steget är koden i `draw()`. Lägg till en rad som justerar ninjans position, `runnerY`. Så här kan det set ut:
 
-```python
-def update():
-  global velocity_y
-  runner.next_image()
+```javascript
+function draw() {
+  noStroke();
+  
+  // Himlen
+  fill(163, 232, 254);
+  rect(0, 0, width, groundY);
+  
+  // Marken
+  fill(88, 242, 152);
+  rect(0, groundY, width, 200);
 
-  if keyboard.up:
-    velocity_y = -15
-
-  runner.y += velocity_y
+  runnerY += velocityY; // nytt
+  // resten som innan
 ```
 
 Det här gör raderna:
 
-`global velocity_y` : Vi behöver använda `global` om vi ändrar på en variabel som finns utanför funktionen.
-
-`if keyboard.up:` : När tangenten med uppåtpil trycks ner …
-
-`velocity_y = -15` : Sätt hastigheten upp/ner till &ndash;15. Ett negativt värde betyder att den rör sig uppåt.
-
-`runner.y += velocity_y` :  Ändra vår ninjas position baserat på hastigheten. Operatorn `+=` betyder att vi ökar `runner.y` med värdet i `velocity_y`.
+- `velocityY = -15` : Sätt hastigheten upp/ner till &ndash;15. Ett negativt värde betyder att den rör sig uppåt.
+- `runnerY += velocityY` :  Ändra vår ninjas position baserat på hastigheten. Symbolen `+=` betyder att vi ökar `runnerY` med värdet i `velocityY`.
 
 ✏️ Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
 >Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med *Run*.
@@ -252,144 +261,222 @@ Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är 
 
 ✏️ Testkör!
 
-Ditt program bör nu se ut så här:
-```python
-import pgzrun
-from pgzhelper import *
+Ditt program kan nu se ut så här:
+```javascript
+let WIDTH = 600;
+let HEIGHT = 450;
+let groundY;
 
-WIDTH, HEIGHT = 600, 450
+// Ninja-variabler
+let runnerX = 100;
+let runnerY;
+let emojiSize = 80;
+let velocityY = 0;
+let gravity = 1;
 
-runner = Actor('run__000')
-run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
-runner.images = run_images
-runner.x = 100
-runner.y = HEIGHT - 200
+// NYTT: Lista med emojis för animeringen
+let runEmojis = ["🏃", "💨"]; 
 
-velocity_y = 0
-gravity = 1
+function setup() {
+  createCanvas(WIDTH, HEIGHT);
+  groundY = height - 200;
+  runnerY = groundY; 
+  
+  textSize(emojiSize);
+  textAlign(CENTER, CENTER);
+}
 
-def update():
-  global velocity_y
-  runner.next_image()
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    velocityY = -15;
+  }
+}
 
-  if keyboard.up:
-    velocity_y = -15
+function draw() {
+  noStroke();
+  
+  // Himlen
+  fill(163, 232, 254);
+  rect(0, 0, width, groundY);
+  
+  // Marken
+  fill(88, 242, 152);
+  rect(0, groundY, width, 200);
 
-  runner.y += velocity_y
-  velocity_y += gravity
-  if runner.y > HEIGHT - 200:
-    velocity_y = 0
-    runner.y = HEIGHT - 200
-
-def draw():
-  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
-  runner.draw()
-
-pgzrun.go() # Måste vara sista raden
+  runnerY += velocityY;
+  velocityY += gravity;
+  
+  if (runnerY > HEIGHT - 200) {
+    velocityY = 0; // sluta fall
+    runnerY = HEIGHT - 200; // stanna på marken
+  } 
+  
+  // --- NYTT: Animeringslogik ---
+  
+  // Vi ritar figuren på skärmen.
+  // Vi använder frameCount för att räkna ut vilken emoji som ska visas.
+  
+  // frameCount ökar med 1 för varje bildruta (ca 60 gånger per sekund).
+  // Genom att dividera med 10 och avrunda nedåt (floor) byter vi emoji långsammare.
+  let frameIndex = floor(frameCount / 10); 
+  
+  // % (modulo) ser till att indexet växlar mellan 0 och 1 (längden på listan).
+  let currentEmojiIndex = frameIndex % runEmojis.length;
+  
+  // Hämta den aktuella emojin från listan
+  let currentEmoji = runEmojis[currentEmojiIndex];
+  
+  // Rita den aktuella emojin
+  text(currentEmoji, runnerX, runnerY);
+}
 ```
 
 # Hinder
 ## En lista med figurer
 
-I vårt [Gem Catcher-spel](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md) har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
+I vårt [Gem Catcher-spel](https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md) har vi bara en ädelsten i taget och den flyttar sig till toppen av skärmen varje gång vi fångar den.
 I ninjaspelet kommer vi att flera hinder på skärmen samtidigt.
-För att klara det behöver vi använda **listor**.
 
 ![image](https://user-images.githubusercontent.com/4598641/223222660-26ee39e0-5420-47ba-8ef9-d4cb855636fe.png)
 
-✏️ Först skapar vi en tom lista som heter `obstacles` och en heltalsvariabel `obstacles_timeout`.
+För att klara det behöver vi listor (arrays). Då kan vi ha många hinder utan att varje hinder måste ha en egen variabel.
 
-```python
-obstacles = []
-obstacles_timeout = 0
-```
-✏️ I vår funktion `update()` ska vi räkna upp `timeout` med 1 varje gång.
-```python
-obstacles_timeout += 1
-```
-✏️ Och om `timeout` är större än 50 lägger vi till ett hinder och sätter `timeout` till 0.
+✏️ Först skapar vi en tom lista som heter `obstacles` och en variabel `obstaclesTimeout`. Lägg till detta någonstans bland de andra variablerna i början av koden.
 
-```python
-if obstacles_timeout > 50:
-  actor = Actor('cactus')
-  actor.x = WIDTH + 50
-  actor.y = HEIGHT - 170
-  obstacles.append(actor)
-  obstacles_timeout = 0
+```javascript
+let obstacles = [];
+let obstaclesTimeout = 0;
 ```
 
-Det enda nya här är `obstacles.append(actor)`. Det lägger till figuren `actor` i hinderlistan, `obstacles`.
+✏️ I vår draw()-funktion ska vi öka `obstaclesTimeout` med 1 för varje bildruta.
 
-**VIKTIGT: Du behöver ha bilden med kaktusen i mappen images. Om du vill använda en annan bild, glöm inte att byta bildnamnet i koden också.**
-
-✏️ För att få hindren att röra sig över skärmen:
-```python
-for actor in obstacles:
-  actor.x -= 8
+```javascript
+obstaclesTimeout += 1;
 ```
-Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje hinder. Att minska *x* gör att hindret rör sig åt vänster.
 
-✏️ Till slut behöver vi rita hindren på skärmen. Lägg till det här i `draw()`-funktionen:
-```python
-for actor in obstacles:
-  actor.draw()
+✏️ Om `obstaclesTimeout` är större än 50 lägger vi till ett nytt hinder-objekt i listan och nollställer räknaren. Det blir alltså ett nytt hinder var femtionde bildruta.
+
+```javascript
+if (obstaclesTimeout > 50) {
+  let obstacle = {
+    x: width + 50,
+    y: height - 170
+  };
+  obstacles.push(obstacle);
+  obstaclesTimeout = 0;
+}
+```
+
+Här skapar vi ett objekt med `{}` som innehåller koordinaterna för hindret. `obstacles.push(obstacle)` lägger till hindret i listan `obstacles`.
+
+✏️ För att få hindren att röra sig över skärmen lägger vi detta i `update()`.
+
+```javascript
+for (let obs of obstacles) {
+  obs.x -= 8;
+}
+```
+
+Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje objekt. Det gör att hindret rör sig åt vänster.
+
+✏️ Till slut ritar vi hindren på skärmen.
+
+```javascript
+for (let obs of obstacles) {
+  textSize(40);
+  text('🌵', obs.x, obs.y);
+}
 ```
 
 ✏️ Testkör din kod!
 
-Nu ska ditt program se ut ungefär så här:
+Nu kan ditt program se ut ungefär så här:
 
-```python
-import pgzrun
-from pgzhelper import *
+```javascript
+let groundY;
 
-WIDTH, HEIGHT = 600, 450
+// Ninja-variabler
+let runnerX = 100;
+let runnerY;
+let emojiSize = 80;
+let velocityY = 0;
+let gravity = 1;
 
-runner = Actor('run__000')
-run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
-runner.images = run_images
-runner.x = 100
-runner.y = HEIGHT - 200
+let runEmojis = ["🏃", "💨"]; 
 
-velocity_y = 0
-gravity = 1
+let obstacles = [];
+let obstaclesTimeout = 0;
 
-obstacles = []
-obstacles_timeout = 0
+function setup() {
+  createCanvas(600, 450);
+  groundY = height - 200;
+  runnerY = groundY; 
+  
+  textSize(emojiSize);
+  textAlign(CENTER, CENTER);
+}
 
-def update():
-  global velocity_y, obstacles_timeout
-  runner.next_image()
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    velocityY = -15;
+  }
+}
 
-  obstacles_timeout += 1
-  if obstacles_timeout > 50:
-    actor = Actor('cactus')
-    actor.x = WIDTH + 50
-    actor.y = HEIGHT - 170
-    obstacles.append(actor)
-    obstacles_timeout = 0
+function draw() {
+  noStroke();
+   
+  // Himlen
+  fill(163, 232, 254);
+  rect(0, 0, width, groundY);
+  
+  // Marken
+  fill(88, 242, 152);
+  rect(0, groundY, width, 200);
+  obstaclesTimeout += 1;
+  if (obstaclesTimeout > 50) {
+    let obstacle = {
+      x: width + 50,
+      y: height - 170
+    };
+    obstacles.push(obstacle);
+    obstaclesTimeout = 0;
+  }
 
-  for actor in obstacles:
-    actor.x -= 8
+  for (let obs of obstacles) {
+     obs.x -= 8;
+  }
 
-  if keyboard.up:
-    velocity_y = -15
-
-  runner.y += velocity_y
-  velocity_y += gravity
-  if runner.y > HEIGHT - 200:
-    velocity_y = 0
-    runner.y = HEIGHT - 200
-
-def draw():
-  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
-  runner.draw()
-  for actor in obstacles:
-    actor.draw()
-
-pgzrun.go() # Måste vara sista raden
+  for (let obs of obstacles) {
+    textSize(40);
+    text('🌵', obs.x, obs.y);
+  }
+  
+  runnerY += velocityY;
+  velocityY += gravity;
+  
+  if (runnerY > height - 200) {
+    velocityY = 0; // sluta fall
+    runnerY = height - 200; // stanna på marken
+  } 
+  
+  // --- NYTT: Animeringslogik ---
+  
+  // Vi ritar figuren på skärmen.
+  // Vi använder frameCount för att räkna ut vilken emoji som ska visas.
+  
+  // frameCount ökar med 1 för varje bildruta (ca 60 gånger per sekund).
+  // Genom att dividera med 10 och avrunda nedåt (floor) byter vi emoji långsammare.
+  let frameIndex = floor(frameCount / 10); 
+  
+  // % (modulo) ser till att indexet växlar mellan 0 och 1 (längden på listan).
+  let currentEmojiIndex = frameIndex % runEmojis.length;
+  
+  // Hämta den aktuella emojin från listan
+  let currentEmoji = runEmojis[currentEmojiIndex];
+  
+  // Rita den aktuella emojin
+  text(currentEmoji, runnerX, runnerY);
+}
 ```
 
 # Poängräkning
