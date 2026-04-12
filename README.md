@@ -1,6 +1,6 @@
 # Välkommen till spelprogrammeringen 🎨
 
-Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket](https://trinket.io) respektive [Processing (p5)](https://editor.p5js.org/).
+Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket med Python 3](https://trinket.io/python3) respektive [Processing, p5](https://editor.p5js.org/).
 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
 * **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
@@ -31,7 +31,8 @@ Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
 
 ## Spökhuset ⭐ och  Nio liv ⭐
 
-Textspel i Python kodar ni i [trinket.io](https://trinket.io/)
+Textspel i Python kodar ni i trinket.
+Det behöver vara Python 3, https://trinket.io/python3, för att det ska fungera med svenska namn som `poäng`.
 
 Projekten finns i Google Classroom.
 
