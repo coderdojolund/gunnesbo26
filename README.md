@@ -1,6 +1,6 @@
-# Välkommen till spelprogrammeringen
+# Välkommen till spelprogrammeringen 🎨
 
-Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i till [repl.it](https://replit.com/~). 
+Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket](https://trinket.io) respektive [Processing (p5)](https://editor.p5.js).
 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*
 * **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
