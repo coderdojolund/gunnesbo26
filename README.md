@@ -1,10 +1,10 @@
 # Välkommen till spelprogrammeringen 🎨
 
-Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket](https://trinket.io) respektive [Processing (p5)](https://editor.p5.js).
+Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket](https://trinket.io) respektive [Processing (p5)](https://editor.p5js.org/).
 
-* **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*
+* **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
 * **Matteuppgifter:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-)
-* **Spel och animering:**
+* **Spel och animering i JavaScript:**
   [Eyes](#eyes-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
@@ -16,16 +16,12 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
-&bull;
-[FIXAS: Hur får jag mer plats på skärmen?](https://github.com/coderdojolund/gunnesbo26/edit/main/README.md#hur-f%C3%A5r-jag-ett-st%C3%B6rre-spelf%C3%B6nster)
-&bull;
-[FIXAS: Hur kan jag spara highscore i en fil?](https://replit.com/@RobertStorlind/highscore-exempel#main.py)
 
 
 ### Gradering
 ⭐: lättare uppgift &ndash; du ska göra minst en av dessa och får göra alla om du vill<br>
 ⭐⭐: lite svårare uppgift<br>
-⭐⭐⭐: de svåraste uppgifterna
+⭐⭐⭐: de svåraste uppgifterna, oftast för att koden blir längre
 
 ### Gör så här
 Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
