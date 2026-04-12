@@ -40,9 +40,10 @@ function setup() {
 ```
 
 ✏️ Testkör!
+>Funktionen `setup()` förbereder spelet. Den körs en gång i början. Variabler som behövs i `draw()` ska komma före `setup()`.
 
 ## Rita
-Vi kan rita figurer med olika funktioner. Innan vi ritar en form måste vi tala om vilken färg den ska ha med fill(). Här är några vanliga funktioner:
+Vi kan rita figurer med olika funktioner. Innan vi ritar en form måste vi tala om vilken färg den ska ha med `fill()`. Här är några vanliga funktioner:
 - `line()`
 - `circle()`
 - `rect()`
@@ -69,7 +70,7 @@ function draw() {
 
 Det här gör de nya raderna:
 
-- `function draw() { ... }`: Detta är en funktion som p5.js kör automatiskt cirka 60 gånger i sekunden. Allt som ska visas på skärmen skrivs här.
+- `function draw() { ... }`: Detta är en funktion som p5.js kör automatiskt cirka 60 gånger i sekunden. Allt som ska visas på skärmen skrivs här. Detta brukar man kalla FPS-loopen. Om den koden är för långsam kommer spelet att lagga.
 - `fill(163, 232, 254)`: Detta sätter färgen för de former som ritas efteråt. Det är en blandning av 163 delar röd, 232 grön och 254 blå.
 - `rect(0, 0, width, height - 200)`: Detta ritar en rektangel. De två första siffrorna är koordinaterna för det övre vänstra hörnet (0, 0). `width` är ritytans totala bredd (600). Den sista delen sätter höjden till ritytans höjd minus 200 pixlar.
 
@@ -243,21 +244,25 @@ Det här gör raderna:
 - `runnerY += velocityY` :  Ändra vår ninjas position baserat på hastigheten. Symbolen `+=` betyder att vi ökar `runnerY` med värdet i `velocityY`.
 
 ✏️ Testa det! Om du programmerat rätt, bör ninjan flyga upp i himlen när du trycker uppåtpil. Det är för att vi inte har lagt till någon gravitation än!
->Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med *Run*.
+>**Funkar inte uppåtpil? Kom ihåg att klicka i spelfönstret när du startat spelet med *Run*.**
 
 ## Gravitation
 Gravitationen ändrar ninjans hastighet. 
 
-✏️ Under raden `runner.y += velocity_y` lägger vi till gravitionen med `velocity_y += gravity`.
+✏️ Under raden `runnerY += velocityY` lägger vi till gravitionen med `velocityY += gravity`.
 
 Nu ramlar vår ninja rakt ner! Vi har inte talat om för ninjan när den ska sluta falla! Vi lägger till det nu:
 
-```python
-if runner.y > HEIGHT - 200:
-  velocity_y = 0
-  runner.y = HEIGHT - 200
+```javascript
+  runnerY += velocityY;
+  velocityY += gravity;
+  
+  if (runnerY > HEIGHT - 200) {
+    velocityY = 0; // sluta fall
+    runnerY = HEIGHT - 200; // stanna på marken
+  } 
 ```
-Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är på en y-koordinat som är större än `HEIGHT - 200` så sätter vi hennes `velocity_y` till 0 och y-koordinaten till `HEIGHT - 200`. Detta hindrar att hon faller igenom marken.
+Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är på en y-koordinat som är större än `HEIGHT - 200` så sätter vi hens `velocityY` till 0 och y-koordinaten till `HEIGHT - 200`. Detta hindrar att hen faller igenom marken.
 
 ✏️ Testkör!
 
@@ -543,157 +548,195 @@ Nu ska du få poäng varje gång du hoppar över en kaktus och den försvinner u
 
 
 # Game Over
-Just nu gör spelet inget även om vår ninja krockar med kaktusen. Vi lägger till ett game over-läge. Om ninjan rör något av hindren så avslutar vi spelet.
+Just nu händer ingenting när ninjan krockar med en kaktus.
+Vi behöver ett sätt att avsluta spelet. 
+Vi ska använda en variabel som håller reda på om spelet pågår eller är slut.
 
-✏️ Först lägger vi till en variabel `game_over` och sätter den till `False` i början.
+✏️ Först lägger vi till en variabel `gameOver` och sätter den till `False` i början. Lägg till den högst upp bland de andra variablerna.
 
-```python
-game_over = False
+```javascript
+let gameOver = false;
 ```
 
-✏️ Inuti funktionen `update()` ska vi upptäcka om vår ninja har krockat med något av hindren. Om hon gjorde det så sätter vi `game_over` till `True`.
+Hur upptäcker vi krockar? Vi måste kontrollera om avståndet mellan ninjan och kaktusen är för litet. I p5.js använder vi funktionen `dist()`.
 
-```python
-if runner.collidelist(obstacles) != -1:
-  game_over = True
+✏️ Hitta loopen i `draw()` där du flyttar hindren. Lägg till kollen för krock:
+
+```javascript
+for (let i = obstacles.length - 1; i >= 0; i--) {
+    let obs = obstacles[i];
+    obs.x -= 8;
+
+    // Kolla krock: Är avståndet mindre än 40 pixlar?
+    if (dist(runnerX, runnerY, obs.x, obs.y) < 40) {
+      gameOver = true;
+    }
+
+    if (obs.x < -50) {
+      obstacles.splice(i, 1);
+      score += 1;
+    }
+  }
 ```
-✏️ **Viktigt: kom ihåg att deklarera `game_over` som global i funktionen `update()`**
 
-Frågan `runner.collidelist(obstacles)` kollar om ninjan har krockat med något av hindren i listan `obstacles`.
-Om hon inte gjorde det, ger funktionen `collidelist` värdet &ndash;1.
+✏️ Visa Game Over-skärmen. Vi ändrar i `draw()` så att spelet visar en text istället för ninjan om `gameOver` är sant.
 
-Sen behöver vi skriva texten *Game over* inuti `draw()` genom att ändra från
-```python
-  runner.draw()
-  for actor in obstacles:
-    actor.draw()
-  screen.draw.text(f"Score: {score}", (15, 10), color=(0,0,0), fontsize=30)
-```
-✏️ till detta:
-```python
-if game_over:
-  screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
-  screen.draw.text(f"Score: {score}", centerx=WIDTH/2, centery=330, color=(255, 255, 255), fontsize=60)
-else:
-  runner.draw()
-  for actor in obstacles:
-    actor.draw()
-  screen.draw.text(f"Score: {score}", (15, 10), color=(0, 0, 0), fontsize=30)
+Sök upp slutet av din `draw()`-funktion och ändra den så här:
+
+```javascript
+if (gameOver) {
+    fill(255, 0, 0); // Röd färg
+    textSize(60);
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width / 2, height / 2 - 50);
+    text("Poäng: " + score, width / 2, height / 2 + 50);
+    noLoop(); // Stoppar spelet helt
+  } else {
+    // Här ritas ninjan (din befintliga animeringskod)
+    let frameIndex = floor(frameCount / 10);
+    let currentEmojiIndex = frameIndex % runEmojis.length;
+    let currentEmoji = runEmojis[currentEmojiIndex];
+    text(currentEmoji, runnerX, runnerY);
+  }
 ```
 
 ✏️ Uppdatera och testkör!
 
-Ditt spel bör se ut så här till slut:
+Ditt spel kan se ut så här till slut:
 
-```python
-import pgzrun
-from pgzhelper import *
+```javascript
+let groundY;
+let runnerX = 100;
+let runnerY;
+let emojiSize = 80;
+let velocityY = 0;
+let gravity = 1;
 
-WIDTH, HEIGHT = 600, 450
+let runEmojis = ["🏃", "💨"];
+let obstacles = [];
+let obstaclesTimeout = 0;
 
-runner = Actor('run__000')
-run_images = ['run__000', 'run__001', 'run__002', 'run__003', 'run__004', 'run__005', 'run__006', 'run__007', 'run__008', 'run__009']
-runner.images = run_images
-runner.x = 100
-runner.y = HEIGHT - 200
+let score = 0;
+let gameOver = false;
 
-velocity_y = 0
-gravity = 1
+function setup() {
+  createCanvas(600, 450);
+  groundY = height - 200;
+  runnerY = groundY;
+  
+  textSize(emojiSize);
+  textAlign(CENTER, CENTER);
+}
 
-obstacles = []
-obstacles_timeout = 0
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    velocityY = -15;
+  }
+}
 
-score = 0
-game_over = False
+function draw() {
+  background(163, 232, 254); // Himlen
+  
+  // Marken
+  noStroke();
+  fill(88, 242, 152);
+  rect(0, groundY, width, 200);
 
-def update():
-  global velocity_y, obstacles_timeout, score, game_over
-  runner.next_image()
+  if (gameOver) {
+    fill(0);
+    textSize(60);
+    textAlign(CENTER, CENTER);
+    text("GAME OVER", width / 2, height / 2 - 50);
+    textSize(40);
+    text("Score: " + score, width / 2, height / 2 + 30);
+    return; // Avslutar funktionen här om spelet är slut
+  }
 
-  obstacles_timeout += 1
-  if obstacles_timeout > 50:
-    actor = Actor('cactus')
-    actor.x = WIDTH + 50
-    actor.y = HEIGHT - 170
-    obstacles.append(actor)
-    obstacles_timeout = 0
+  // Skapa hinder
+  obstaclesTimeout += 1;
+  if (obstaclesTimeout > 50) {
+    obstacles.push({ x: width + 50, y: height - 170 });
+    obstaclesTimeout = 0;
+  }
 
-  for actor in obstacles:
-    actor.x -= 8
-    if actor.x < -50:
-      obstacles.remove(actor)
-      score += 1
+  // Hantera hinder
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    let obs = obstacles[i];
+    obs.x -= 8;
 
-  if keyboard.up:
-    velocity_y = -15
+    // Kolla krock
+    if (dist(runnerX, runnerY, obs.x, obs.y) < 40) {
+      gameOver = true;
+    }
 
-  runner.y += velocity_y
-  velocity_y += gravity
-  if runner.y > HEIGHT - 200:
-    velocity_y = 0
-    runner.y = HEIGHT - 200
+    // Ta bort hinder och ge poäng
+    if (obs.x < -50) {
+      obstacles.splice(i, 1);
+      score += 1;
+    }
 
-  if runner.collidelist(obstacles) != -1:
-    game_over = True
+    textSize(40);
+    text('🌵', obs.x, obs.y);
+  }
 
-def draw():
-  screen.draw.filled_rect(Rect(0, 0, WIDTH, HEIGHT - 200), (163, 232, 254))
-  screen.draw.filled_rect(Rect(0, HEIGHT - 200, WIDTH, 200), (88, 242, 152))
-  if game_over:
-    screen.draw.text('Game Over', centerx=WIDTH/2, centery=HEIGHT - 330, color=(255, 255, 255), fontsize=60)
-    screen.draw.text(f"Score: {score}", centerx=WIDTH/2, centery=330, color=(255, 255, 255), fontsize=60)
-  else:
-    runner.draw()
-    for actor in obstacles:
-      actor.draw()
-    screen.draw.text(f"Score: {score}", (15, 10), color=(0, 0, 0), fontsize=30)
+  // Fysik för ninjan
+  runnerY += velocityY;
+  velocityY += gravity;
+  if (runnerY > groundY) {
+    velocityY = 0;
+    runnerY = groundY;
+  }
 
-pgzrun.go() # Måste vara sista raden
+  // Rita poäng
+  fill(0);
+  textSize(30);
+  textAlign(LEFT, TOP);
+  text("Score: " + score, 20, 20);
+
+  // Animera och rita ninjan
+  textAlign(CENTER, CENTER);
+  textSize(emojiSize);
+  let frameIndex = floor(frameCount / 10);
+  let currentEmoji = runEmojis[frameIndex % runEmojis.length];
+  text(currentEmoji, runnerX, runnerY);
+}
 ```
 
 # Uppgifter
 
-Det är vanligt att program har buggar. Jag har avsiktligt lämnat kvar ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem! Redovisa hur du gjorde.
+Det är vanligt att program har buggar. Det finns ett par buggar i vårt ninjaspel. Har du hittat några än? Pröva att rätta dem! Redovisa hur du gjorde.
 
-## Uppgift 1: Buggfix 1. Game Over-poäng
-Spela spelet, låt din ninja krocka med en kaktus och kolla sen poängräknaren efter game over … Såg du att poängen fortsatte öka? Det händer eftersom vi fortsätter lägga till kaktusar i hinderlistan efter game over. Kan du fixa det?
+## Uppgift 1: Buggfix. Multihopp
+Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hen är på marken och inte i luften. Kan du fixa det?
 
-## Uppgift 2: Buggfix 2. Multihopp
-Pröva att snabbt trycka på hoppknappen flera gånger. Hoppade din ninja upp ovanför det som syns på skärmen? Ninjan ska bara kunna hoppa när hon är på marken och inte i luften. Kan du fixa det?
-
-## Uppgift 3: Utvärdera ert eget arbete!
+## Uppgift 2: Utvärdera ert eget arbete!
 När ni svarar på detta, tänk på att *ni har tillgång till uppgiften* &ndash; ni behöver alltså inte kunna koden utantill.
 
-**3A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
+**2A.** De här delarna av uppgiften har vi gjort. Vi förstår dem och kan förklara koden för Susanne eller inför klassen.
 
-**3B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
+**2B.** De här delarna av uppgiften har vi gjort *men vi förstår dem inte till 100%*. Ge exempel på något ni inte förstår.
 
-## Uppgift 4
-Välj och gör minst en av utmaningarna 1, 2, 3 här nedanför. Redovisa så här:
+## Uppgift 3
+Välj och gör minst en av utmaningarna här nedanför. Redovisa så här:
 - Beskriv kort vad förändringen är och hur den ska fungera.
 - Beskriv hur du fick ändra koden för att göra ändringen.
 - Om det inte gick att genomföra, förklara med några meningar vad du försökte och vad som hände. Glöm inte kodexempel. 
 
-### Utmaning 1. Glidande ninja
-Kan du ändra ninjabilden till en glidande ninja när hon hoppar? Om du använder en annan figur så har de flesta en liknande bild med hopp som du kan använda:
+## Utmaning 1: Olika hinder
+Just nu finns bara kaktusar. Kan du göra så att spelet väljer slumpmässigt mellan olika emoji?
 
-![image](https://user-images.githubusercontent.com/4598641/223225545-64334e74-b6e3-4511-8f25-8128512012d8.png)
-![image](https://user-images.githubusercontent.com/4598641/223225411-f124b452-0956-44a9-bbe2-1e9936c87552.png)
-![image](https://user-images.githubusercontent.com/4598641/223225445-7663895c-45e2-4237-95c4-7dfaef60d46f.png)
+>Ledtråd: Skapa en lista med hinder: `let emojiList = ["🌵", "🔥", "💣"];` Använd funktionen `random(emojiList)` när du skapar ett nytt hinder-objekt
 
+## Utmaning 2: Öka svårighetsgraden
+Spelet är ganska enkelt nu. Kan du få det att gå snabbare ju mer poäng du får?
 
-### Utmaning 2. Olika hinder
-Det enda hindret just nu är kaktusen. Kan du göra så att programmet väljer bland olika slags hinder varje gång?
+Ledtråd: Ersätt siffran `8` i `obs.x -= 8` med en variabel, till exempel `speed`. Öka speed lite varje gång `score` går upp.
 
-![image](https://user-images.githubusercontent.com/4598641/223225610-600aa71d-9f7d-4d51-bc0d-745b8442470b.png)
-![image](https://user-images.githubusercontent.com/4598641/223225631-7523def5-ca93-4bb9-a7d1-df6ad8b6e06c.png)
-![image](https://user-images.githubusercontent.com/4598641/223225654-7930549a-1186-4d7e-8ae7-572e8670cd5d.png)
 
 ### Utmaning 3. Sprid ut hindren
 Som spelet är nu dyker hindren alltid upp på samma avstånd från varann. Kan du slumpa till det så att hindren ibland är närmare och ibland längre från varann?
->Kom ihåg att göra `import random` så kan du använda t.ex. `random.randint(min, max + 1)` för att få ett slumptal mellan `min` och `max`.
+
+> Ledtråd: läs på om funkionen `random()`
 
 # Källor
-Projektet är en översättning och anpassning till p5.js av originalet på https://aposteriori.trinket.io/game-development-with-pygame-zero#/ninja-runner/infinite-runner
-
-This is a Swedish translation and p5.js adaptation of https://aposteriori.trinket.io/game-development-with-pygame-zero#/ninja-runner/infinite-runner
+Detta är en översättning och anpassning till p5.js av originalet på [Trinket.io](https://aposteriori.trinket.io/game-development-with-pygame-zero#/ninja-runner/infinite-runner).
