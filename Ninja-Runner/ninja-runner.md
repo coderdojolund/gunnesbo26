@@ -13,12 +13,6 @@
 
 Ett spel av typen Infinite/Endless Runner tar aldrig slut. Målet är att överleva så långt som möjligt och ju längre, desto högre poäng får du.
 
-För att göra vårt spel ska vi använda vad vi lärt oss från spelet [Gem Catcher](https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md) och lägga till
-- ritning
-- animering
-- fysik
-- listor med figurer (aktörer).
-
 ## Jobba så här
 Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför ett avsnitt i taget uppifrån och ner.
 - Få det att fungera innan ni går vidare till nästa avsnitt. 
