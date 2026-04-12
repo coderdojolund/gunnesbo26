@@ -115,7 +115,8 @@ Det här gör den nya raden:
 ## Animering
 Vi gör en enkel animering genom att byta mellan två olika emoji. 
 Jämför med din kod och lägg till det nya.
-- Du behöver inte lägga till förklaringarna som börjar med `//` 
+- Du behöver inte lägga till förklaringarna som börjar med `//`
+- Variabeln `groundY` använder vi för att slippa skriva `height - 200` så många gånger. Den gör det lättare att ändra hur mycket plats marken tar i spelgrafiken.
 
 ```javascript
 let groundY;
@@ -176,15 +177,15 @@ function draw() {
 
 ### Justera placeringen
 
-Du kan justera ninjas placering med `runner.x` och `runner.y`.
+Du kan justera ninjans placering med `runnerX` och `runnerY`.
 
 ✏️ Pröva detta:
 
 ```javascript
 runnerX = 100
-runnerY = HEIGHT - 200
+runnerY = height - 200
 ```
-✏️ **Pröva att justera ninjans position genom att ändra `runner.x` och `runner.y` tills hen är där du vill.**
+✏️ **Pröva att justera ninjans position genom att ändra `runnerX` och `runnerY` tills hen är där du vill.**
 
 # Hoppa
 
@@ -255,12 +256,12 @@ Nu ramlar vår ninja rakt ner! Vi har inte talat om för ninjan när den ska slu
   runnerY += velocityY;
   velocityY += gravity;
   
-  if (runnerY > HEIGHT - 200) {
+  if (runnerY > groundY) {
     velocityY = 0; // sluta fall
-    runnerY = HEIGHT - 200; // stanna på marken
+    runnerY = groundY; // stanna på marken
   } 
 ```
-Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är på en y-koordinat som är större än `HEIGHT - 200` så sätter vi hens `velocityY` till 0 och y-koordinaten till `HEIGHT - 200`. Detta hindrar att hen faller igenom marken.
+Här bestämmer vi att `height - 200` (`groundY`) är där marken börjar och om ninjan är på en y-koordinat som är större än `groundY` så sätter vi hens `velocityY` till 0 och y-koordinaten till `groundY`. Detta hindrar att hen faller igenom marken.
 
 ✏️ Testkör!
 
@@ -307,9 +308,9 @@ function draw() {
   runnerY += velocityY;
   velocityY += gravity;
   
-  if (runnerY > HEIGHT - 200) {
+  if (runnerY > groundY) {
     velocityY = 0; // sluta fall
-    runnerY = HEIGHT - 200; // stanna på marken
+    runnerY = groundY; // stanna på marken
   } 
   
   // --- NYTT: Animeringslogik ---
@@ -361,7 +362,7 @@ obstaclesTimeout += 1;
 if (obstaclesTimeout > 50) {
   let obstacle = {
     x: width + 50,
-    y: height - 170
+    y: height - 200
   };
   obstacles.push(obstacle);
   obstaclesTimeout = 0;
@@ -378,12 +379,13 @@ for (let obs of obstacles) {
 }
 ```
 
-Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje objekt. Det gör att hindret rör sig åt vänster.
+Detta går igenom hela listan `obstacles` och minskar x-koordinaten för varje objekt `obs`. Det gör att hindret rör sig åt vänster.
 
-✏️ Till slut ritar vi hindren på skärmen.
+✏️ Till slut ritar vi hindren på skärmen. Vi kan göra det i samma `for`-slinga. Vi ska ju ändå gå igenom alla hindren. Uppdatera koden så att den blir så här:
 
 ```javascript
 for (let obs of obstacles) {
+  obs.x -= 8;
   textSize(40);
   text('🌵', obs.x, obs.y);
 }
@@ -437,17 +439,14 @@ function draw() {
   if (obstaclesTimeout > 50) {
     let obstacle = {
       x: width + 50,
-      y: height - 170
+      y: height - 200
     };
     obstacles.push(obstacle);
     obstaclesTimeout = 0;
   }
 
   for (let obs of obstacles) {
-     obs.x -= 8;
-  }
-
-  for (let obs of obstacles) {
+    obs.x -= 8;
     textSize(40);
     text('🌵', obs.x, obs.y);
   }
@@ -455,9 +454,9 @@ function draw() {
   runnerY += velocityY;
   velocityY += gravity;
   
-  if (runnerY > height - 200) {
-    velocityY = 0; // sluta fall
-    runnerY = height - 200; // stanna på marken
+  if (runnerY > groundY) {
+    velocityY = 0; // sluta falla
+    runnerY = groundY; // stanna på marken
   } 
   
   // Animeringslogik ---
@@ -651,7 +650,7 @@ function draw() {
   // Skapa hinder
   obstaclesTimeout += 1;
   if (obstaclesTimeout > 50) {
-    obstacles.push({ x: width + 50, y: height - 170 });
+    obstacles.push({ x: width + 50, y: height - 200 });
     obstaclesTimeout = 0;
   }
 
