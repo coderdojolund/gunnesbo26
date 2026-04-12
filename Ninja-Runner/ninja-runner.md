@@ -118,8 +118,6 @@ Jämför med din kod och lägg till det nya.
 - Du behöver inte lägga till förklaringarna som börjar med `//` 
 
 ```javascript
-let WIDTH = 600;
-let HEIGHT = 450;
 let groundY;
 
 // Ninja-variabler
@@ -131,7 +129,7 @@ let emojiSize = 80;
 let runEmojis = ["🏃", "💨"]; 
 
 function setup() {
-  createCanvas(WIDTH, HEIGHT);
+  createCanvas(600, 450);
   groundY = height - 200;
   runnerY = groundY; 
   
@@ -268,8 +266,6 @@ Här bestämmer vi att `HEIGHT - 200` är där marken börjar och om ninjan är 
 
 Ditt program kan nu se ut så här:
 ```javascript
-let WIDTH = 600;
-let HEIGHT = 450;
 let groundY;
 
 // Ninja-variabler
@@ -283,7 +279,7 @@ let gravity = 1;
 let runEmojis = ["🏃", "💨"]; 
 
 function setup() {
-  createCanvas(WIDTH, HEIGHT);
+  createCanvas(600, 450);
   groundY = height - 200;
   runnerY = groundY; 
   
