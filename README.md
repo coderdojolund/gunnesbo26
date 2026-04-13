@@ -34,7 +34,9 @@ Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
 Textspel i Python kodar ni i trinket.
 >👉 Det behöver vara Python 3, https://trinket.io/python3, för att det ska fungera med svenska namn som `poäng`.
 
-Projekten finns i Google Classroom.
+Det går också bra att använda Google Colab: https://colab.research.google.com/
+
+Spökhuset och Nio liv finns i Google Classroom.
 
 ## Eyes ⭐⭐
 [![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
@@ -74,7 +76,7 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md
 
 [![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md)
 
-Pythonprojekt som du kodar i [trinket.io](https://trinket.io/)
+Detta är ett textbaserat Pythonprojekt som du kodar i [trinket.io](https://trinket.io/) eller Google Colab: https://colab.research.google.com/
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Dagar/dagar.md
 
