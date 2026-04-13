@@ -59,7 +59,7 @@ Spelet är över när ormen slingrar in i sig själv.
 # Översikt
 Ormen är en variabel som har en lista av X- och Y-koordinater.
 
-Maten representeras av en X- och Y-koordinat.
+Maten har en X- och en Y-koordinat.
 
 Ormen rör sig i två steg:
 
@@ -86,7 +86,7 @@ Ormen har krockat med sig själv om den nya huvudpositionen är samma som något
 
 ## Rita bakgrunden
 
-Spelområdet är 20 celler brett och 15 celler högt, och varje cell har en sidolängd på 15 pixlar.
+Spelområdet är 20 celler brett och 15 celler högt. Varje cell har en sidolängd på 15 pixlar.
 
 Spelytan (canvas) ritas upp i funktionen `setup()`; bakgrunden ritas i `draw()`.
 
@@ -154,7 +154,7 @@ function draw() {
 }
 ```
 
-✏️ Testkör koden. Så här ska det se ut.
+✏️ Testkör koden. Så här kan det se ut.
 >Fungerar det inte? Kolla dina ändringar noga.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439469-a0bf9621-d2ff-4b38-810e-9a1be63b3324.png)
@@ -166,7 +166,7 @@ Ormen kommer att röra sig var 0,15:e sekund.
 
 En timervariabel börjar på 0 och ökar med `deltaTime` för varje bildruta. I p5.js mäts `deltaTime` i millisekunder, så vi dividerar med 1000 för att få det i sekunder.
 
-När timern är större eller lika med 0.15 återställs den till 0.
+När timern är större eller lika med 0,15 återställs den till 0.
 
 För närvarande skrivs `tick` ut varje gång ormen ska röra sig.
 
@@ -249,9 +249,10 @@ function draw() {
 Nästa position för ormens huvud beräknas genom att öka den nuvarande X-koordinaten för ormens huvud med 1. Det är första elementet i listan med ormens segment.
 Detta nya segment läggs till i början av listan (med `unshift`).
 
-Det sista elementet i listan, ormens svans, tas bort (med `pop`).
+Det sista elementet i listan, alltså ormens svans, tas bort (med `pop`).
 
-Segmentlistan ändras nu över tid, så den måste flyttas ut ur `draw()` och bli en global variabel.
+Segmentlistan ändras nu för varje bildruta, så den måste flyttas ut ur `draw()` och bli en global variabel.
+- Lokala variabler som vi skapar inne i `draw()` försvinner varje gång `draw()` körs.
 
 ✏️ Uppdatera koden och testkör.
 
@@ -388,7 +389,7 @@ function draw() {
     snakeSegments.pop();
   }
 
-  // etc... draw background and rects
+  // etc... rita bakgrund osv.
 }
 
 function keyPressed() { // nytt 🐍
@@ -575,13 +576,13 @@ Om ormen t.ex. slingrade åt höger på den sista ticket och du trycker neråtpi
 
 Dessutom kan spelaren vilja ge flera anvisningar inom ett enda tick. I exemplet ovan kan spelaren ha velat att ormen skulle flytta neråt ett tick och sen vänster nästa tick.
 
-Därför behöver vi en riktningskö (array). Det första elementet i kön är riktningen som ormen kommer att röra sig vid nästa tick.
+Därför behöver vi en riktningskö (lista, *array* på engelska). Det första elementet i listan är riktningen som ormen kommer att röra sig vid nästa tick.
 
 Om riktningskön har mer än ett element, tas det första elementet bort (med `shift`) vid varje tick.
 
-När en knapp trycks ned läggs riktningen till i slutet av riktningskön (med `push`).
-
-Det sista elementet i riktningskön, alltså den senast tryckta riktningen, kontrolleras för att se om det inte är i motsatt riktning mot den nya riktningen innan den nya riktningen läggs till i kön.
+När en knapp trycks ner läggs riktningen till i slutet av riktningskön (med `push`).
+- Vi behöver kolla den nya riktningen. 
+- Om ormen t.ex. slingrar åt vänster och spelaren trycker högerpil så skulle ormen dö meddetsamma för att den kraschar in i sig själv. Det är onödigt och vi skippar då högerpilen.
 
 ✏️ Uppdatera koden.
 
@@ -771,7 +772,7 @@ function keyPressed() {
 }
 ```
 
-Testkör – vad händer när du  snabbt trycker på olika piltangenter, eller samma piltangent?
+Testkör – vad händer när du snabbt trycker på olika piltangenter, eller samma piltangent?
 
 <details>
 <summary>📝 Så här kan koden se ut nu</summary>
@@ -864,7 +865,7 @@ function keyPressed() {
 
 ## Slå över vid skärmkanten
 
-Om nästa position skulle vara utanför rutnätet, slår vi över till motsatta sidan på skärmen.
+Om nästa position skulle vara utanför rutnätet, fortsätter vi på motsatta sidan av skärmen.
 
 ✏️ Uppdatera raderna med 🐍 i `draw()` så att det blir så här:
 
@@ -1004,9 +1005,11 @@ function keyPressed() {
 
 ## Rita maten
 
-Maten lagras som ett objekt med X- och Y-koordinater. Maten ritas som en kvadrat.
+Matens placering, `foodPosition`, är ett objekt med X- och Y-koordinater. Maten ritas som en kvadrat.
 
-p5.js inbyggda `random()` och `floor()` används för att slumpa fram positionen. Maten måste beräknas inuti `setup()` för p5.js funktioner finns tillgängliga först då.
+p5.js inbyggda funktioner `random()` och `floor()` används för att slumpa fram positionen. Maten måste beräknas inuti `setup()` för p5.js funktioner finns tillgängliga först då.
+- `random(n)` ger ett slumptal mellan 0 och n
+- `floor(n)` avrundar talet n neråt till närmaste heltal
 
 ✏️ Uppdatera koden.
 
@@ -1158,8 +1161,9 @@ function keyPressed() {
 
 ## Förenkla koden
 
-Koden för att rita en orms segment och rita maten är samma, förutom färgen.
-Vi gör det till en funktion med färgen som parameter. I p5.js kan vi skicka in färgen som en array av rgb-värden.
+Koden för att rita en ruta med ett ormsegment och för att rita maten är samma, förutom färgen.
+Vi gör det till en funktion med färgen som parameter. I p5.js kan vi skicka in färgen som en lista med rgb-värden.
+- RGB = en kombination av röd, grön, blå som skapar en viss färg. RGB (0, 0, 0) är t.ex. svart och (255, 255, 255) är vitt. Läs på om *additiv färgblandning* om du vill veta mer.
 
 ✏️ Uppdatera de markerade raderna i `draw()`.
 
@@ -1185,7 +1189,7 @@ function draw() {
 
   drawCell(foodPosition.x, foodPosition.y, [255, 76, 76]); // nytt 🐍
 
-  // etc. text array
+  // etc. textutskrift
 }
 ```
 
@@ -1310,7 +1314,7 @@ Om ormens nya huvudposition är samma som matens position, tas inte ormens svans
 
 På så vis blir ormen en ruta längre.
 
-✏️ Uppdatera logiken inuti din timer-block i `draw()`.
+✏️ Uppdatera logiken inuti timer-blocket i `draw()`.
 
 ```javascript
 function draw() {
@@ -1458,7 +1462,8 @@ function keyPressed() {
 
 ## Förenkla koden
 
-Koden för att lägga maten på en slumpmässig position behövs på fler ställen. Vi gör en global funktion för det.
+Koden för att lägga maten på en slumpmässig position behövs på fler ställen. 
+- Vi gör en global funktion för att kunna återanvända den.
 
 ✏️ Lägg till funktionen utanför `draw()`, anropa den i `setup()` och uppdatera logiken.
 
@@ -1616,11 +1621,11 @@ function keyPressed() {
 
 ## Flytta maten till en ledig ruta
 
-Istället för att flytta maten till en slumpmässig plats, flyttar den till en plats där ormen inte är just nu.
+Istället för att flytta maten till en slumpmässig ruta så vill vi ha den på en ledig ruta där ormen inte är.
 
-Alla positioner i rutnätet loopas igenom. För varje rutnätsposition loopar vi igenom alla ormens segment.
+Alla positioner i rutnätet gås igenom. För varje rutnätsposition loopar vi igenom alla ormens segment.
 Om inga ormsegment är på en viss rutnätsposition, läggs den positionen till i en lista över möjliga matpositioner.
-Nästa matposition väljs sen slumpmässigt från den listan. I p5.js använder vi `random()` på en array för att få ut en slumpmässig matbit.
+Nästa matposition väljs sen slumpmässigt från den listan. I p5.js använder vi `random()` på den listan för att få ut en slumpmässig matbit.
 
 ✏️ Uppdatera kodraderna i `moveFood()`.
 
@@ -1793,7 +1798,7 @@ Ormens segment loopas igenom. Om något av dem – förutom det sista – är i 
 
 > Det sista segmentet på ormen ska inte kollas eftersom det kommer att tas bort inom samma tick. I JavaScript kan vi få ut alla element förutom sista med `snakeSegments.slice(0, -1)`.
 
-För närvarande skrivs `collision` ut när ormen kraschar in i sig själv.
+Vi börjar enkelt med att skriva ut `collision` när ormen kraschar in i sig själv.
 
 ✏️ Uppdatera i funktionen `draw()`.
 
@@ -1995,7 +2000,7 @@ Funktionen anropas innan spelet börjar och när ormen kraschar.
 
 ```javascript
 let directionQueue; // ta bort = ['right'] härifrån
-let snakeSegments;  // ta bort den ursprungliga arrayen härifrån
+let snakeSegments;  // ta bort den ursprungliga listan härifrån
 
 function moveFood() {
   // etc.
@@ -2224,7 +2229,7 @@ function draw() {
     reset(); // nytt 🐍
   } // nytt 🐍
   
-  // etc. drawing code
+  // etc. kod för att rita
 ```
 
 ✏️ Testkör – vad händer när ormen kraschar?
@@ -2616,6 +2621,3 @@ Pröva att göra några ändringar eller tillägg. Det kan vara en poängräknar
 3.  **Terminal Output Screenshot:**
       * `https://user-images.githubusercontent.com/4598641/235365117...png`
       * This image displays a Python terminal. A p5.js user will view `console.log()` output in the browser developer tools console or the web editor console.
-4.  **Source Link:**
-      * `https://simplegametutorials.github.io/pygamezero/snake/`
-      * This link directs the reader to the Pygame Zero version of the tutorial. You may wish to replace it with a native p5.js resource or add a note clarifying it as the origin of the Python version.
