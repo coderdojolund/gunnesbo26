@@ -23,7 +23,7 @@ Hur kan du använda den informationen för att räkna ut hur många dagar du fyl
 &bull; **[Uppgifter](#uppgifter)**
 
 ## STEG 1: Prata med användaren
-<img src=dagar1.png width="400px">
+![Första början](dagar1.png)
 
 Vi börjar med hur det ska se ut när vi kör appen.
 1. Appen ska fråga efter ett startdatum, alltså år, månad, dag. Det kan t.ex. vara användarens födelsedatum
@@ -32,7 +32,7 @@ Vi börjar med hur det ska se ut när vi kör appen.
 
 
 ✏️ Mata in den här koden i ett nytt Pythonprojekt i trinket.io. Det behöver vara Python 3: https://trinket.io/python3
-Om du inte kör Python 3 kommer trinket att klaga på svenska tecken i variablerna, t.ex. `år`.
+Om du inte kör Python 3 kommer trinket att klaga på svenska tecken i variablerna, t.ex. `år`. Det går också bra att använda Google Colab.
 
 **main.py**
 ```python

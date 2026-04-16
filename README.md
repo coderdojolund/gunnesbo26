@@ -60,7 +60,7 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Blocks/blocks.md
 
-## OM VI HINNER: Fifteen ⭐⭐⭐
+## Fifteen ⭐⭐⭐
 
 [![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md))
 
