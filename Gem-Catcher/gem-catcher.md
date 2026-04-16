@@ -1,6 +1,6 @@
 # Gem Catcher ⭐⭐
 
-![image](https://user-images.githubusercontent.com/4598641/230712343-2ac82257-0f69-40e0-921a-c525adc833f6.png)
+![image](image0.png)
 
 ## Innehåll
 [Första koden](#första-koden) &bull;

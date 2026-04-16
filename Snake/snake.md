@@ -66,17 +66,15 @@ Ormen rör sig i två steg:
 1.  Vi tar bort det sista elementet i listan – det är den gamla svanspositionen.
 2.  Sen lägger vi till ett nytt element först i listan. Det är den nya positionen för huvudet i den riktning som ormen ringlar.
 
-Så här kan det se ut i p5.js koordinatsystem. Y-axeln är upp och ner jämfört med vanliga koordinataxlar. Det är vanligt i datorgrafik. [Scratch](https://scratch.mit.edu) är ett undantag.
+Så här kan det se ut i p5.js koordinatsystem. Y-axeln är upp och ner jämfört med vanliga koordinataxlar. Det är vanligt i datorgrafik. [Scratch](https://scratch.mit.edu) är ett känt undantag.
 <br>
 <img src="https://github.com/user-attachments/assets/a771cf43-c8a9-4f59-82ae-16955d1fbd44" width="50%">
 
-Jämför med hur det ser ut i koden. Verkar det stämma?<br>
 ![image](https://user-images.githubusercontent.com/4598641/226439258-020b4582-5409-448b-99e6-55cf6a4bbcdc.png)
 
-![image](https://user-images.githubusercontent.com/4598641/226439284-599e5e4f-6987-4eea-8b79-f39d5a2d850a.png)
 
 När ormen når maten är huvudpositionen samma som matens position.
-Då rör vi inte svansen utan flyttar maten till en slumpmässig ruta där ormen inte är. Ormen har alltså blivit en ruta längre av maten.
+Då rör vi inte svansen utan flyttar maten till en slumpmässig ruta där ormen *inte* är. Ormen har alltså blivit en ruta längre av maten.
 
 ![image](https://user-images.githubusercontent.com/4598641/226439323-b54bc813-62f2-49d5-ac3b-1002ba0de713.png)
 
@@ -90,12 +88,9 @@ Spelområdet är 20 celler brett och 15 celler högt. Varje cell har en sidolän
 
 Spelytan (canvas) ritas upp i funktionen `setup()`; bakgrunden ritas i `draw()`.
 
-✏️ Kör koden med Run i https://editor.p5.js. Ser det ut så här?
+![bakgrunden](image-bakgrunden.png)
 
-![image](https://user-images.githubusercontent.com/4598641/235364441-4af78ea9-4545-40d5-af52-ed10b6de87da.png)
-
-<details>
-    <summary>📝 Så här kan koden se ut nu</summary>
+<summary>📝 Så här kan koden se ut nu</summary>
 
 ```javascript
 // Globala variabler här nedanför
@@ -113,7 +108,8 @@ function draw() {
 }
 ```
 
-</details>
+
+✏️ Kör koden med Run i https://editor.p5.js. Ser det ut så här?
 
 ## Rita ormen
 
@@ -198,8 +194,7 @@ function draw() {
 
 ✏️ Testkör och kolla utskriften i terminalfönstret. Ser det ut så här?
 
-![image](https://user-images.githubusercontent.com/4598641/235365117-32e6a3e4-1427-450b-8f0b-8fddb4fb64ee.png)
-
+![tickutskrift](image-tick.png)
 
 <details>
     <summary>📝 Så här kan koden se ut nu</summary>

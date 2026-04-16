@@ -72,7 +72,7 @@ Det här gör de nya raderna:
 
 Så här ser det ut när jag testar:
 
-![image](https://user-images.githubusercontent.com/4598641/235426777-440c48fd-7882-43e0-af99-1b1327ebb411.png)
+![image](image0.png)
 
 ## Marken
 Steget innan ritade himlen. Vi lägger till en andra rektangel för att rita marken.
@@ -590,6 +590,10 @@ if (gameOver) {
 ```
 
 ✏️ Uppdatera och testkör!
+
+Så här kan det se ut:
+
+![image](image-done.png)
 
 Ditt spel kan se ut så här till slut:
 
