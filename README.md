@@ -31,6 +31,10 @@ Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
 
 ## Spökhuset ⭐ och  Nio liv ⭐
 
+![Spökhuset](spökhuset.png)
+
+![Nio liv](nio-liv.png)
+
 Textspel i Python kodar ni i trinket.
 >👉 Det behöver vara Python 3, https://trinket.io/python3, för att det ska fungera med svenska namn som `poäng`.
 
