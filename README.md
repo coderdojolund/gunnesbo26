@@ -102,6 +102,7 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
       <td>Skapa en variabel</td>
       <td><pre><code>poäng = 20</code></pre></td>
       <td><pre><code>let poäng = 20;</code></pre></td>
+    </tr>
     <tr>
       <td>Skapa en funktion</td>
       <td>
