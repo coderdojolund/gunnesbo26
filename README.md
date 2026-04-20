@@ -16,7 +16,7 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
-  &bull; [Python och Javascript är olika](#)
+  &bull; [Python och Javascript är olika](#python-och-javascript-%C3%A4r-olika)
 
 
 ### Gradering
@@ -100,8 +100,8 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
   <tbody>
     <tr>
       <td>Skapa en variabel</td>
-      <td><pre><code>kostnad = 20
-      <td><pre><code>let kostnad = 20
+      <td><pre><code>poäng = 20</code></pre></td>
+      <td><pre><code>let poäng = 20;</code></pre></td>
     <tr>
       <td>Skapa en funktion</td>
       <td>
@@ -114,7 +114,7 @@ def moms(pris):
 function moms(pris) {
   return pris*1.25;
 }
-👆 tänk på måsvingarna { och }
+👆tänk på måsvingarna { och }
 </code></pre> </td> </tr>
 
 </table>
