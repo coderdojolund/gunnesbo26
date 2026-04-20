@@ -16,6 +16,7 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   &bull; [Snake](#snake-)
   &bull; [Sokoban](#sokoban-)
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
+  &bull; [Python och Javascript är olika](#)
 
 
 ### Gradering
@@ -99,20 +100,24 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
   <tbody>
     <tr>
       <td>Skapa en variabel</td>
+      <td><pre><code>kostnad = 20
+      <td><pre><code>let kostnad = 20
+    <tr>
+      <td>Skapa en funktion</td>
       <td>
         <pre><code>
-def greet(name):
-  """This function greets the person passed in as a parameter."""
-  print("Hello, " + name + ". Good morning!")
-
-greet('World')
-</code></pre> </td> </tr> <tr> <td>JavaScript</td> <td> <pre><code>
-function greet(name) {
-  console.log(`Hello, ${name}. Good morning!`);
+def moms(pris):
+    return pris*1.25
+👆👆tänk på mellanslagen
+</code></pre> </td>
+<td> <pre><code>
+function moms(pris) {
+  return pris*1.25;
 }
-
-greet('World');
+👆 tänk på måsvingarna { och }
 </code></pre> </td> </tr>
+
+</table>
 
 # Källor
 - Projektet från 2023 finns [här](https://github.com/coderdojolund/gunnesbo8). Det använde repl.it.
