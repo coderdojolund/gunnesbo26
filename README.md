@@ -91,13 +91,14 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 <table>
   <thead>
     <tr>
-      <th>Language</th>
-      <th>Code Example</th>
+      <th>Vad?</th>
+      <th>Python</th>
+      <th>JavaScript</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Python</td>
+      <td>Skapa en variabel</td>
       <td>
         <pre><code>
 def greet(name):
