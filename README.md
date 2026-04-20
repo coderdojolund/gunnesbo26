@@ -105,19 +105,19 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
     </tr>
     <tr>
       <td>Skapa en funktion</td>
-      <td>
-        <pre><code>
+      <td><pre><code>
 def moms(pris):
     return pris*1.25
 👆👆tänk på mellanslagen
-</code></pre> </td>
-<td> <pre><code>
+</code></pre></td>
+<td><pre><code>
 function moms(pris) {
   return pris*1.25;
 }
 👆tänk på måsvingarna { och }
-</code></pre> </td> </tr>
-
+</code></pre></td>
+</tr>
+</tbody>
 </table>
 
 # Källor
