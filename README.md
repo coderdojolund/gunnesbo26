@@ -44,15 +44,21 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
 ## Gem Catcher ⭐⭐
 
-[![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/gemgreen.png)](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md)
+![gem-catcher](Gem-Catcher/image0.png)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md
 
 ## Ninja Runner ⭐⭐
 
-[![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__004.png)](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md)
+![ninja-runner](Ninja-Runner/image-done.png)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.md
+
+## Snake ⭐⭐⭐
+
+[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
+
+https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 
 
 ## Hur många dagar fyller du? ⭐⭐⭐
@@ -63,11 +69,6 @@ Detta är ett textbaserat Pythonprojekt som du kodar i [trinket.io](https://trin
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Dagar/dagar.md
 
-## Snake ⭐⭐⭐
-
-[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
-
-https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 
 
 # Var hittar jag symbolerna på tangentbordet?
