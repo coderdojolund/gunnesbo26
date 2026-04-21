@@ -3,12 +3,12 @@
 Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och fungerar i [trinket med Python 3](https://trinket.io/python3) respektive [Processing, p5](https://editor.p5js.org/).
 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
-* **Klura som en ingenjör:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-). Vi löser problem som vi inte riktigt förstår ett steg i taget.
 * **Spel och animering i JavaScript:**
   [Eyes](#eyes-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Snake](#snake-)
+* **Klura som en ingenjör:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-). Vi löser problem ett steg i taget.
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
   &bull; [Python och Javascript är olika](#python-och-javascript-%C3%A4r-olika)
 
