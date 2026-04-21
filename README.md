@@ -44,13 +44,13 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
 ## Gem Catcher ⭐⭐
 
-[![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/gemgreen.png)](https://github.com/coderdojolund/Python-8/blob/main/Gem-Catcher/gem-catcher.md)
+![gem-catcher](Gem-Catcher/image0.png)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md
 
 ## Ninja Runner ⭐⭐
 
-[![](https://www.aposteriori.com.sg/wp-content/uploads/2020/02/run__004.png)](https://github.com/coderdojolund/Python-8/blob/main/Ninja-Runner/ninja-runner.md)
+![ninja-runner](Ninja-Runner/image-done.png)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.md
 
