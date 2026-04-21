@@ -8,13 +8,7 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
   [Eyes](#eyes-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
-  &bull; [Blocks](#blocks-)
-  &bull; [Fifteen](#fifteen-)
-  &bull; [Flowers](#flowers-)
-  &bull; [Life](#life-)
-  &bull; [Repeat](#repeat-)
   &bull; [Snake](#snake-)
-  &bull; [Sokoban](#sokoban-)
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
   &bull; [Python och Javascript är olika](#python-och-javascript-%C3%A4r-olika)
 
