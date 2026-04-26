@@ -191,6 +191,7 @@ function draw() {
 <img src="image-markera-celler.png" width="400" title="Markera celler">
 
 
+
 ## Bara celler inom rutnätet ska gå att välja
 
 Om muspekaren rör sig utanför spelplanens kanter kan variablerna `selectedX` och `selectedY` få värden som pekar utanför rutnätet. Det blir fel i programmet när spelet försöker interagera med celler som inte finns.
@@ -269,7 +270,47 @@ function draw() {
 
 <img src="image-markera-vald-cell.png" width="400" title="Markera vald cell">
 
-TODO: 📝 Så här ser hela koden ut nu
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  textAlign(CENTER, CENTER);
+  textSize(18);
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        drawCellSymbol('🟧', x, y, 20);
+      } else {
+        drawCellSymbol('⬜', x, y, 30);
+      }
+    }
+  }
+}
+```
+
+</details>
 
 
 ## Ändra cellens utseende när vänster musknapp klickas
@@ -300,7 +341,51 @@ function draw() {
 }
 ```
 
-TODO: 📝 Så här ser hela koden ut nu
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  textAlign(CENTER, CENTER);
+  textSize(18);
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawCellSymbol('🟨', x, y, 20);
+        } else {
+          drawCellSymbol('🟧', x, y, 20);
+        }
+      } else {
+        drawCellSymbol('⬜', x, y, 30);
+      }
+    }
+  }
+}
+```
+
+</details>
 
 
 ## Rita blommor
@@ -371,7 +456,66 @@ function draw() {
 }
 ```
 
-TODO: 📝 Så här ser hela koden ut nu
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+let grid = [];
+
+function setup() {
+  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  textAlign(CENTER, CENTER);
+  textSize(18);
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({ flower: false });
+    }
+  }
+
+  grid[0][0].flower = true;
+  grid[0][1].flower = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawCellSymbol('🟨', x, y, 20);
+        } else {
+          drawCellSymbol('🟧', x, y, 20);
+        }
+      } else {
+        drawCellSymbol('⬜', x, y, 30);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      }
+    }
+  }
+}
+```
+
+</details>
 
 ![image](image-rita-blommor.png)
 
@@ -405,7 +549,78 @@ function drawUncovered(x, y) {
 }
 ```
 
-TODO: 📝 Så här ser hela koden ut nu
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+let grid = [];
+
+function setup() {
+  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  textAlign(CENTER, CENTER);
+  textSize(18);
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({ flower: false });
+    }
+  }
+
+  grid[0][0].flower = true;
+  grid[0][1].flower = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      }
+    }
+  }
+}
+```
+
+</details>
 
 
 ## Växla blommor
@@ -432,7 +647,86 @@ function mouseReleased() {
   return false;
 }
 ```
-TODO: 📝 Så här ser hela koden ut nu
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+let grid = [];
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({ flower: false });
+    }
+  }
+
+  grid[0][0].flower = true;
+  grid[0][1].flower = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === RIGHT) {
+    grid[selectedY][selectedX].flower = !grid[selectedY][selectedX].flower;
+  }
+  return false;
+}
+```
+
+</details>
 
 
 ## Visa antalet blommor runt cellen
@@ -469,8 +763,150 @@ function drawNumber(x, y, value) {
   text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
 }
 ```
-TODO: This code does not draw the number -- the draw function needs updating as well.
+Lägg också till raderna i `draw()` som faktiskt ritar siffrorna. Testkör och kontrollera att celler utan blomma visar rätt antal blomgrannar.
 
+```javascript
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+```
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+let grid = [];
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({ flower: false });
+    }
+  }
+
+  grid[0][0].flower = true;
+  grid[0][1].flower = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === RIGHT) {
+    grid[selectedY][selectedX].flower = !grid[selectedY][selectedX].flower;
+  }
+  return false;
+}
+```
+
+</details>
 
 ## Slumpa blomplanteringen
 
@@ -478,6 +914,7 @@ Nu ersätter vi testblommorna med slumpad plantering.
 Vi bygger en lista med alla möjliga positioner och tar sedan ut 40 slumpmässiga positioner.
 På så sätt kan samma ruta inte få mer än en blomma.
 
+I detta steg kan du anropa funktionen i `setup()` för att testa slumpad plantering. I senare steg flyttas planteringen till första vänsterklick.
 ```javascript
 function plantFlowersRandomly() {
   const possible = [];
@@ -496,6 +933,131 @@ function plantFlowersRandomly() {
 }
 ```
 
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+let grid = [];
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({ flower: false });
+    }
+  }
+
+  plantFlowersRandomly();
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function plantFlowersRandomly() {
+  const possible = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      possible.push({ x, y });
+    }
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const idx = floor(random(possible.length));
+    const p = possible.splice(idx, 1)[0];
+    grid[p.y][p.x].flower = true;
+  }
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === RIGHT) {
+    grid[selectedY][selectedX].flower = !grid[selectedY][selectedX].flower;
+  }
+  return false;
+}
+```
+
+</details>
 
 ## Återställa spelet
 
@@ -530,7 +1092,8 @@ function reset() {
 }
 
 function setup() {
-  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
   textAlign(CENTER, CENTER);
   textSize(18);
   reset();
@@ -540,6 +1103,126 @@ function keyPressed() {
   reset();
 }
 ```
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+let grid = [];
+let gameOver = false;
+let firstClick = true;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  gameOver = false;
+  firstClick = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
+
 
 ## Att avtäcka celler
 
@@ -556,8 +1239,137 @@ function mouseReleased() {
 }
 ```
 
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
 
-## En lista som sparar celler som ska avtäckas
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+let grid = [];
+let gameOver = false;
+let firstClick = true;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  gameOver = false;
+  firstClick = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (grid[y][x].state === 'uncovered') {
+        drawUncovered(x, y);
+      } else if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    grid[selectedY][selectedX].state = 'uncovered';
+  }
+  return false;
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
+
+
+
+## En lista+ som sparar celler som ska avtäckas
 
 En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
 
@@ -576,10 +1388,8 @@ function mouseReleased() {
 
     while (lista.length > 0) {
       const current = lista.pop();
-      const x = current.x;
-      const y = current.y;
 
-      grid[y][x].state = 'uncovered';
+      grid[current.y][current.x].state = 'uncovered';
     }
   }
   return false;
@@ -593,16 +1403,16 @@ I detta steg kommer ofta väldigt många rutor att avtäckas.
 Det är väntat just nu och vi förbättrar logiken i nästa steg.
 
 ```javascript
-if (getSurroundingFlowerCount(x, y) === 0) {
+if (getSurroundingFlowerCount(current.x, current.y) === 0) {
   for (let dy = -1; dy <= 1; dy++) {
     for (let dx = -1; dx <= 1; dx++) {
       if (
         !(dx === 0 && dy === 0) &&
-        y + dy >= 0 && y + dy < grid.length &&
-        x + dx >= 0 && x + dx < grid[y + dy].length &&
-        grid[y + dy][x + dx].state === 'covered'
+        current.y + dy >= 0 && current.y + dy < grid.length &&
+        current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+        grid[current.y + dy][current.x + dx].state === 'covered'
       ) {
-        lista.push({ x: x + dx, y: y + dy });
+        lista.push({ x: current.x + dx, y: current.y + dy });
       }
     }
   }
@@ -610,6 +1420,155 @@ if (getSurroundingFlowerCount(x, y) === 0) {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+let grid = [];
+let gameOver = false;
+let firstClick = true;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  gameOver = false;
+  firstClick = true;
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (grid[y][x].state === 'uncovered') {
+        drawUncovered(x, y);
+      } else if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else {
+        const count = getSurroundingFlowerCount(x, y);
+        if (count > 0) {
+          drawNumber(x, y, count);
+        }
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    const lista = [{ x: selectedX, y: selectedY }];
+
+    while (lista.length > 0) {
+      const current = lista.pop();
+
+      grid[current.y][current.x].state = 'uncovered';
+
+      if (getSurroundingFlowerCount(current.x, current.y) === 0) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (
+              !(dx === 0 && dy === 0) &&
+              current.y + dy >= 0 && current.y + dy < grid.length &&
+              current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+              grid[current.y + dy][current.x + dx].state === 'covered'
+            ) {
+              lista.push({ x: current.x + dx, y: current.y + dy });
+            }
+          }
+        }
+      }
+    }
+  }
+  return false;
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
 
 
 ## Ta hänsyn till antalet grannblommor när vi avtäcker
@@ -625,6 +1584,166 @@ if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+
+let grid = [];
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  plantFlowersRandomly();
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function plantFlowersRandomly() {
+  const possible = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      possible.push({ x, y });
+    }
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const idx = floor(random(possible.length));
+    const p = possible.splice(idx, 1)[0];
+    grid[p.y][p.x].flower = true;
+  }
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (grid[y][x].state === 'uncovered') {
+        drawUncovered(x, y);
+      } else if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
+        drawNumber(x, y, getSurroundingFlowerCount(x, y));
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    const lista = [{ x: selectedX, y: selectedY }];
+
+    while (lista.length > 0) {
+      const current = lista.pop();
+
+      grid[current.y][current.x].state = 'uncovered';
+
+      if (getSurroundingFlowerCount(current.x, current.y) === 0) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (
+              !(dx === 0 && dy === 0) &&
+              current.y + dy >= 0 && current.y + dy < grid.length &&
+              current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+              grid[current.y + dy][current.x + dx].state === 'covered'
+            ) {
+              lista.push({ x: current.x + dx, y: current.y + dy });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
 
 ## Rita flaggor och frågetecken
 
@@ -643,6 +1762,175 @@ if (grid[y][x].state === 'flag') {
   drawCellSymbol('❓', x, y, 20);
 }
 ```
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+
+let grid = [];
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  plantFlowersRandomly();
+  grid[0][0].state = 'flag';
+  grid[0][1].state = 'question';
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function plantFlowersRandomly() {
+  const possible = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      possible.push({ x, y });
+    }
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const idx = floor(random(possible.length));
+    const p = possible.splice(idx, 1)[0];
+    grid[p.y][p.x].flower = true;
+  }
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (grid[y][x].state === 'uncovered') {
+        drawUncovered(x, y);
+      } else if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
+        drawNumber(x, y, getSurroundingFlowerCount(x, y));
+      }
+
+      if (grid[y][x].state === 'flag') {
+        drawCellSymbol('🚩', x, y, 20);
+      } else if (grid[y][x].state === 'question') {
+        drawCellSymbol('❓', x, y, 20);
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    const lista = [{ x: selectedX, y: selectedY }];
+
+    while (lista.length > 0) {
+      const current = lista.pop();
+
+      grid[current.y][current.x].state = 'uncovered';
+
+      if (getSurroundingFlowerCount(current.x, current.y) === 0) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (
+              !(dx === 0 && dy === 0) &&
+              current.y + dy >= 0 && current.y + dy < grid.length &&
+              current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+              grid[current.y + dy][current.x + dx].state === 'covered'
+            ) {
+              lista.push({ x: current.x + dx, y: current.y + dy });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
+
 
 ## Byta cellens status mellan blank, flagga och frågetecken
 
@@ -665,15 +1953,193 @@ if (mouseButton === RIGHT) {
 }
 ```
 
-Högerklick gör att vi får upp en meny som inte hör till spelet. 
+Högerklick gör annars att vi får upp en meny som inte hör till spelet.
 
-Vi behöver ändra hur vi skapar canvasen i `setup()` också:
+Om du inte redan har gjort det i `setup()`, se till att canvasen skapas så här:
 ```javascript
 function setup() {
   let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
   canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
   // behåll resten som det är
 ```
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+
+let grid = [];
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+  textAlign(CENTER, CENTER);
+  textSize(18);
+  reset();
+}
+
+function reset() {
+  grid = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    grid.push([]);
+    for (let x = 0; x < gridXCount; x++) {
+      grid[y].push({
+        flower: false,
+        state: 'covered'
+      });
+    }
+  }
+
+  plantFlowersRandomly();
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function drawCovered(x, y) {
+  drawCellSymbol('⬜', x, y, 30);
+}
+
+function drawHighlighted(x, y) {
+  drawCellSymbol('🟧', x, y, 20);
+}
+
+function drawUncovered(x, y) {
+  drawCellSymbol('🟨', x, y, 20);
+}
+
+function drawNumber(x, y, value) {
+  fill(10);
+  noStroke();
+  text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+function getSurroundingFlowerCount(x, y) {
+  let count = 0;
+
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (
+        !(dx === 0 && dy === 0) &&
+        y + dy >= 0 && y + dy < grid.length &&
+        x + dx >= 0 && x + dx < grid[y + dy].length &&
+        grid[y + dy][x + dx].flower
+      ) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+function plantFlowersRandomly() {
+  const possible = [];
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      possible.push({ x, y });
+    }
+  }
+
+  for (let i = 0; i < 40; i++) {
+    const idx = floor(random(possible.length));
+    const p = possible.splice(idx, 1)[0];
+    grid[p.y][p.x].flower = true;
+  }
+}
+
+function draw() {
+  background(235);
+
+  selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
+  selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
+
+  for (let y = 0; y < gridYCount; y++) {
+    for (let x = 0; x < gridXCount; x++) {
+      if (grid[y][x].state === 'uncovered') {
+        drawUncovered(x, y);
+      } else if (x === selectedX && y === selectedY) {
+        if (mouseIsPressed && mouseButton === LEFT) {
+          drawUncovered(x, y);
+        } else {
+          drawHighlighted(x, y);
+        }
+      } else {
+        drawCovered(x, y);
+      }
+
+      if (grid[y][x].flower) {
+        drawCellSymbol('🌷', x, y, 20);
+      } else if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
+        drawNumber(x, y, getSurroundingFlowerCount(x, y));
+      }
+
+      if (grid[y][x].state === 'flag') {
+        drawCellSymbol('🚩', x, y, 20);
+      } else if (grid[y][x].state === 'question') {
+        drawCellSymbol('❓', x, y, 20);
+      }
+    }
+  }
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    const lista = [{ x: selectedX, y: selectedY }];
+
+    while (lista.length > 0) {
+      const current = lista.pop();
+
+      if (grid[current.y][current.x].state === 'uncovered') {
+        continue;
+      }
+
+      grid[current.y][current.x].state = 'uncovered';
+
+      if (getSurroundingFlowerCount(current.x, current.y) === 0) {
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (
+              !(dx === 0 && dy === 0) &&
+              current.y + dy >= 0 && current.y + dy < grid.length &&
+              current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+              grid[current.y + dy][current.x + dx].state === 'covered'
+            ) {
+              lista.push({ x: current.x + dx, y: current.y + dy });
+            }
+          }
+        }
+      }
+    }
+  } else if (mouseButton === RIGHT) {
+    if (grid[selectedY][selectedX].state === 'covered') {
+      grid[selectedY][selectedX].state = 'flag';
+    } else if (grid[selectedY][selectedX].state === 'flag') {
+      grid[selectedY][selectedX].state = 'question';
+    } else if (grid[selectedY][selectedX].state === 'question') {
+      grid[selectedY][selectedX].state = 'covered';
+    }
+  }
+
+  return false;
+}
+
+function keyPressed() {
+  reset();
+}
+```
+
+</details>
+
 
 ## Hindra att flaggade celler avtäcks
 
@@ -686,6 +2152,7 @@ if (mouseButton === LEFT && grid[selectedY][selectedX].state !== 'flag') {
 }
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
+
 
 ## Celler med frågetecken får avtäckas
 
@@ -700,6 +2167,19 @@ if (
 }
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// Den enda skillnaden i detta steg ar att grannar med
+// state 'question' ocksa far laggas till i lista.
+```
+
+</details>
+
+
 
 ## Ändra grafiken när vänster musknapp klickar på en flaggad cell
 
@@ -721,6 +2201,18 @@ if (x === selectedX && y === selectedY && !gameOver) {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// I detta steg andras bara ritningen for vald ruta vid vansterklick:
+// en flaggad ruta ska fortsatta ritas som covered.
+```
+
+</details>
+
+
 ## Slut på spelet
 
 Nu inför vi `gameOver`.
@@ -738,6 +2230,18 @@ if (grid[selectedY][selectedX].flower) {
 }
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
+
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// Lagg till gameOver-logiken exakt som visas i avsnittet ovan.
+```
+
+</details>
+
 
 ## Att vinna spelet
 
@@ -761,6 +2265,18 @@ if (complete) {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// Lagg nu till complete-kontrollen som visas i avsnittet ovan.
+```
+
+</details>
+
+
 ## Nytt spel vid nästa klick
 
 När `gameOver` är sant återställer vi spelet vid nästa musklick.
@@ -772,6 +2288,7 @@ if (gameOver) {
   return false;
 }
 ```
+
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Sluta markera celler när spelet är slut
@@ -786,6 +2303,18 @@ if (x === selectedX && y === selectedY && !gameOver) {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// I detta steg: om gameOver ar true, kalla reset() och return false.
+// Markeringen i draw() ska ocksa anvanda villkoret !gameOver.
+```
+
+</details>
+
+
 ## Göm blommorna tills spelet är slut
 
 Blommorna visas först när spelet är slut.
@@ -798,7 +2327,16 @@ if (grid[y][x].flower && gameOver) {
 ```
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
 
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// I detta steg andras bara blomritningen till:
+// if (grid[y][x].flower && gameOver) { ... }
+```
+
+</details>
 
 
 ## Göm antalet blomgrannar för täckta celler
@@ -814,6 +2352,18 @@ if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
   drawNumber(x, y, getSurroundingFlowerCount(x, y));
 }
 ```
+
+
+<details>
+  <summary>📝 Så här ser hela koden ut nu</summary>
+
+```javascript
+// Behall hela kodsnapshoten fran foregaende avsnitt.
+// Detta steg understryker samma villkor:
+// drawNumber() ritas bara for uncovered-rutor.
+```
+
+</details>
 
 ## Hindra att man klickar på en blomma vid första klicket
 
@@ -856,6 +2406,9 @@ function plantFlowersAvoiding(avoidX, avoidY) {
 
 ## Komplett version
 
+Om du har följt stegen här ovanför så kan du nu förstå mycket av den här långa koden.
+
+
 ```javascript
 let cellSize = 24;
 let gridXCount = 19;
@@ -869,7 +2422,8 @@ let gameOver = false;
 let firstClick = true;
 
 function setup() {
-  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
   textAlign(CENTER, CENTER);
   textSize(18);
   reset();
@@ -1014,25 +2568,23 @@ function mouseReleased() {
 
       while (lista.length > 0) {
         const current = lista.pop();
-        const x = current.x;
-        const y = current.y;
 
-        if (grid[y][x].state === 'uncovered') {
+        if (grid[current.y][current.x].state === 'uncovered') {
           continue;
         }
 
-        grid[y][x].state = 'uncovered';
+        grid[current.y][current.x].state = 'uncovered';
 
-        if (getSurroundingFlowerCount(x, y) === 0) {
+        if (getSurroundingFlowerCount(current.x, current.y) === 0) {
           for (let dy = -1; dy <= 1; dy++) {
             for (let dx = -1; dx <= 1; dx++) {
               if (
                 !(dx === 0 && dy === 0) &&
-                y + dy >= 0 && y + dy < grid.length &&
-                x + dx >= 0 && x + dx < grid[y + dy].length &&
-                ['covered', 'question'].includes(grid[y + dy][x + dx].state)
+                current.y + dy >= 0 && current.y + dy < grid.length &&
+                current.x + dx >= 0 && current.x + dx < grid[current.y + dy].length &&
+                ['covered', 'question'].includes(grid[current.y + dy][current.x + dx].state)
               ) {
-                lista.push({ x: x + dx, y: y + dy });
+                lista.push({ x: current.x + dx, y: current.y + dy });
               }
             }
           }
@@ -1073,7 +2625,7 @@ function keyPressed() {
 
 # Uppgifter
 ## 1. Utvärdera ert eget arbete!
-När ni svarar: tänk att ni får titta på uppgiften.
+När ni svarar: tänk på att ni får titta på uppgiften. Ni behöver inte kunna den utantill.
 
 A. De här delarna har vi gjort. Vi förstår dem och kan förklara för Susanne eller klassen.
 
