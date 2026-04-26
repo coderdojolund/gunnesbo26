@@ -45,34 +45,33 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
 ## Gem Catcher ⭐⭐
 
-![gem-catcher](Gem-Catcher/image0.png)
+[![gem-catcher](Gem-Catcher/image0.png)](Gem-Catcher/gem-catcher.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md
 
 ## Ninja Runner ⭐⭐
 
-![ninja-runner](Ninja-Runner/image-done.png)
+[![ninja-runner](Ninja-Runner/image-done.png)](Ninja-Runner/ninja-runner.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.md
 
 ## Flowers ⭐⭐⭐
 
-Kommer senare!
 
-[![](Flowers/image-hela.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md)
+[![](Flowers/image-hela.png)](Flowers/flowers.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md
 
 ## Snake ⭐⭐⭐
 
-[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md)
+[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](Snake/snake.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 
 
 ## Hur många dagar fyller du? ⭐⭐⭐
 
-[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Dagar/dagar.md)
+[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](Dagar/dagar.md)
 
 Detta är ett textbaserat Pythonprojekt som du kodar i [trinket.io](https://trinket.io/) eller Google Colab: https://colab.research.google.com/
 
