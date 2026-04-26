@@ -22,9 +22,10 @@ Var det något i beskrivningen som var svårt att förstå? Ta med det i redovis
 
 # Första koden
 
-✏️ Gå till https://editor.p5js.org 
+✏️ Gå till Processing, https://editor.p5js.org 
+>Du ska inte logga in på p5.js. Spara istället din kod i ett dokument på Google Drive mellan lektionerna.
 
-I p5.js använder vi två huvudfunktioner: 
+I Processing använder vi två huvudfunktioner: 
 - `setup()` körs en gång i början
 - `draw()` körs hela tiden, precis som en film
 
