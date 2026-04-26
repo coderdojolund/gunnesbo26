@@ -5,6 +5,7 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
 * **Spel och animering i JavaScript:**
   [Eyes](#eyes-)
+  &bull; [Flowers](#flowers-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Snake](#snake-)
