@@ -1,6 +1,6 @@
 # Fifteen ⭐⭐⭐
 
-## En handledning för JavaScript och p5.js (editor.p5js.org)
+## En handledning för JavaScript och Processing (editor.p5js.org)
 
 ![image](https://user-images.githubusercontent.com/4598641/226436083-7b0b90b9-9c13-4b83-bfd8-3534ac8291c0.png)
 
@@ -74,6 +74,8 @@ Bitarna ritas som rutor.
 Just nu ritas en bit där den tomma rutan ska vara.
 
 ✏️ Öppna https://editor.p5js.org/, välj **New Sketch** och jobba i filen `sketch.js`.
+>Du ska inte logga in på p5.js. Spara istället din kod i ett dokument på Google Drive mellan lektionerna.
+
 Testkör!
 
 ```javascript
@@ -266,6 +268,7 @@ Det första steget i att flytta en bit är att hitta positionen för den tomma r
 När en tangent trycks ned loopar vi igenom rutnätet. Om en bit är lika med antalet bitar på varje axel multiplicerat med varandra så är det den tomma rutan. Positionen skrivs ut i konsolen.
 
 ✏️ Lägg till funktionen `keyPressed()` och testkör genom att klicka i spelfönstret och sedan trycka någon tangent. Utskriften visas i p5.js-konsolen.
+>Kom ihåg att klicka i spelfönstret när du startar spelet. Då kan spelet fånga upp tangenttryckningarna.
 
 ```javascript
 function keyPressed() {
@@ -298,6 +301,7 @@ Den tomma rutan ändras till bitnumret ovanför rutan. Biten ovanför rutan änd
 Just nu flyttar vilken tangent som helst en bit ner.
 
 ✏️ Uppdatera koden och testkör genom att trycka på någon tangent. Flyttas biten neråt som den ska?
+>Kom ihåg att klicka i spelfönstret när du startar spelet.
 
 ```javascript
 function keyPressed() {
