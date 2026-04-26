@@ -5,9 +5,9 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
 * **Spel och animering i JavaScript:**
   [Eyes](#eyes-)
-  &bull; [Flowers](#flowers-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
+  &bull; [Flowers](#flowers-)
   &bull; [Snake](#snake-)
 * **Klura som en ingenjör:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-) Vi löser problem ett steg i taget.
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
@@ -39,7 +39,7 @@ Det går också bra att använda Google Colab: https://colab.research.google.com
 Instruktionerna för Spökhuset och Nio liv finns i Google Classroom.
 
 ## Eyes ⭐⭐
-[![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/Python-8/blob/main/Eyes/eyes.md)
+[![](https://user-images.githubusercontent.com/4598641/225428635-1243d0e6-0dac-4fd4-9691-8860a452a4b0.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Eyes/eyes.md
 
@@ -55,16 +55,24 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Gem-Catcher/gem-catcher.md
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Ninja-Runner/ninja-runner.md
 
+## Flowers ⭐⭐⭐
+
+Kommer senare!
+
+[![](Flowers/image-hela.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md)
+
+https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md
+
 ## Snake ⭐⭐⭐
 
-[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/Python-8/blob/main/Snake/snake.md)
+[![](https://user-images.githubusercontent.com/4598641/226438506-04b12dc8-3adc-4e44-93e9-35f2512fa898.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Snake/snake.md
 
 
 ## Hur många dagar fyller du? ⭐⭐⭐
 
-[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/Python-8/blob/main/Dagar/dagar.md)
+[![](https://user-images.githubusercontent.com/4598641/222891027-71c791b1-acee-44c5-a585-3eb620d30ae6.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Dagar/dagar.md)
 
 Detta är ett textbaserat Pythonprojekt som du kodar i [trinket.io](https://trinket.io/) eller Google Colab: https://colab.research.google.com/
 
@@ -117,14 +125,13 @@ function moms(pris) {
 </table>
 
 # Källor
-- Projektet från 2023 finns [här](https://github.com/coderdojolund/gunnesbo8). Det använde repl.it.
+- Projektet från 2023 finns [här](https://github.com/coderdojolund/Python-8). Det använde repl.it.
 
 # OM VI HINNER!
 
 ## Blocks ⭐⭐⭐
-Kommer senare!
 
-[![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)](https://github.com/coderdojolund/Python-8/blob/main/Blocks/blocks.md))
+[![](https://user-images.githubusercontent.com/4598641/226103304-00173642-8a08-4ef3-a1b5-ae896b6d8c94.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Blocks/blocks.md))
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Blocks/blocks.md
 
@@ -132,35 +139,28 @@ https://github.com/coderdojolund/gunnesbo26/blob/main/Blocks/blocks.md
 
 Kommer senare!
 
-[![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/Python-8/blob/main/Fifteen/fifteen.md))
+[![](https://user-images.githubusercontent.com/4598641/226438128-2ee9720e-4128-4af2-aa04-5cc69daafd27.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Fifteen/fifteen.md))
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Fifteen/fifteen.md
 
-## Flowers ⭐⭐⭐
-
-Kommer senare!
-
-[![](https://user-images.githubusercontent.com/4598641/226452466-c09472f6-9f75-435b-b7c3-9bda65238539.png)](https://github.com/coderdojolund/Python-8/blob/main/Flowers/flowers.md)
-
-https://github.com/coderdojolund/gunnesbo26/blob/main/Flowers/flowers.md
 
 ## Life ⭐⭐⭐
 Kommer senare!
 
-[![](https://user-images.githubusercontent.com/4598641/225745694-931e3ac9-aa8e-4931-bf60-b673bd7f5536.png)](https://github.com/coderdojolund/Python-8/blob/main/Life/life.md) 
+[![](https://user-images.githubusercontent.com/4598641/225745694-931e3ac9-aa8e-4931-bf60-b673bd7f5536.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Life/life.md) 
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Life/life.md
 
 ## Repeat ⭐⭐⭐
 Kommer senare!
 
-[![](https://user-images.githubusercontent.com/4598641/225746247-eb970a66-98e9-4352-85c4-eed3690745fb.png)](https://github.com/coderdojolund/Python-8/blob/main/Repeat/repeat.md)
+[![](https://user-images.githubusercontent.com/4598641/225746247-eb970a66-98e9-4352-85c4-eed3690745fb.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Repeat/repeat.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Repeat/repeat.md
 
 ## Sokoban ⭐⭐⭐
 Kommer senare!
 
-[![](https://user-images.githubusercontent.com/4598641/226438553-be7f0fc4-19b6-43b1-86ba-cc869b76dab4.png)](https://github.com/coderdojolund/Python-8/blob/main/Sokoban/sokoban.md)
+[![](https://user-images.githubusercontent.com/4598641/226438553-be7f0fc4-19b6-43b1-86ba-cc869b76dab4.png)](https://github.com/coderdojolund/gunnesbo26/blob/main/Sokoban/sokoban.md)
 
 https://github.com/coderdojolund/gunnesbo26/blob/main/Sokoban/sokoban.md
