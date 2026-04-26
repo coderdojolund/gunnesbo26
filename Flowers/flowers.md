@@ -736,6 +736,8 @@ Vi räknar blomgrannar.
 - Om en granne finns inom rutnätet och innehåller en blomma ökar räknaren med 1.
 - Sen kan vi rita siffran i rutan.
 
+![Antalet blommor runt cellen](image-visa-antalet.png)
+
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ```javascript
@@ -1369,7 +1371,7 @@ function keyPressed() {
 
 
 
-## En lista+ som sparar celler som ska avtäckas
+## En lista som sparar celler som ska avtäckas
 
 En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
 
