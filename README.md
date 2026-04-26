@@ -31,7 +31,7 @@ Uppgifterna är bara en början &ndash; gör egna förbättringar och tillägg.
 
 ![Nio liv](nio-liv.png)
 
-Textspel i Python kodar ni i [trinket](https://trinket.io/python3).
+Textspel i Python kodar ni i Google Colab eller [trinket](https://trinket.io/python3).
 >👉 Det behöver vara Python 3, https://trinket.io/python3, för att det ska fungera med svenska namn som `poäng`.
 
 Det går också bra att använda Google Colab: https://colab.research.google.com/
