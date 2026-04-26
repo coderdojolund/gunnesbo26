@@ -5,10 +5,10 @@ Vi kodar spel i Python och JavaScript. Spelen är översatta från engelska och 
 * **Lätta uppgifter att börja med:** Spökhuset: *se Google Classroom* &bull; Nio liv: *se Google Classroom*. Detta är textspel i Python.
 * **Spel och animering i JavaScript:**
   [Eyes](#eyes-)
+  &bull; [Flowers](#flowers-)
   &bull; [Gem Catcher](#gem-catcher-)
   &bull; [Ninja Runner](#ninja-runner-)
   &bull; [Snake](#snake-)
-  &bull; [Flowers](#flowers-)
 * **Klura som en ingenjör:** [Eyes](#eyes-) &bull; [Hur många dagar fyller du?](#hur-många-dagar-fyller-du-) Vi löser problem ett steg i taget.
 * **Tips:** [Var hittar jag specialtecken på tangentbordet? { @ } [ _ ]  ](#var-hittar-jag-symbolerna-på-tangentbordet)
   &bull; [Python och Javascript är olika](#python-och-javascript-%C3%A4r-olika)
