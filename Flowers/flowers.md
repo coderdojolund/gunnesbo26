@@ -29,7 +29,7 @@
   &bull; [Återställa spelet](#återställa-spelet)
   &bull; [Att avtäcka celler](#att-avtäcka-celler)
   &bull; [En lista som sparar celler som ska avtäckas](#en-lista-som-sparar-celler-som-ska-avtäckas)
-  &bull; [Lägg till fler celler på stacken](#lägg-till-fler-celler-på-stacken)
+  &bull; [Lägg till fler celler på listan](#lägg-till-fler-celler-på-listan)
   &bull; [Ta hänsyn till antalet grannblommor när vi avtäcker](#ta-hänsyn-till-antalet-grannblommor-när-vi-avtäcker)
   &bull; [Rita flaggor och frågetecken](#rita-flaggor-och-frågetecken)
   &bull; [Byta cellens status mellan blank, flagga och frågetecken](#byta-cellens-status-mellan-blank-flagga-och-frågetecken)
@@ -91,12 +91,23 @@ Vi ritar med:
 - emoji (`🌷`, `🚩`, `❓`)
 - siffror för antalet blomgrannar, `1` till `8`
 
+## Att skriva emoji
+På Chromebook kan du söka efter emoji genom att hålla ner skift + sök och trycka på mellanslagstangenten.
+
+Sök på de här engelska namnen för att hitta rätt emoji till spelet:
+- ⬜ : *White large square*
+- 🟧 : *Orange square*
+- 🟨 : *Yellow square*
+- 🌷 : *Tulip*
+- 🚩 : *Triangular flag*
+- ❓ : *Question mark*
+
 # Kodning
 ## Rita celler
 Vi börjar med att rita täckta rutor.
 
-Skriv in koden på https://editor.p5js.org. 
->Du ska inte logga in. Kom ihåg att spara din kod på Google Drive.
+Skriv in koden på Processing, https://editor.p5js.org. 
+>Du ska inte logga in på p5.js. Kom ihåg att spara din kod på Google Drive.
 
 ✏️ Testkör. Ser det ut som på bilden?
 
@@ -137,8 +148,14 @@ Så här ser koden ut nu. Vi har lagt till de två variablerna och uppdaterat fu
 ✏️ Uppdatera och testkör!  Ser det ut som i bildexemplet?
 
 ```javascript
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
 let selectedX = 0;
 let selectedY = 0;
+
+// setup() som innan
+// drawCellSymbol() som innan
 
 function draw() {
   background(235);
@@ -163,20 +180,41 @@ function draw() {
 
 
 ## Bara celler inom rutnätet ska gå att välja
-Om muspositionen är större än rutnätets storlek i X- eller Y-led, alltså om vi pekar utanför rutnätet, så ställs den valda positionen in på den sista cellen på den axeln.
 
-Rutnätets storlek i X- och Y-led återanvänds från att rita cellerna. Vi gör därför variabler med storlekarna.
+Om muspekaren rör sig utanför spelplanens kanter kan variablerna `selectedX` och `selectedY` få värden som pekar utanför rutnätet. Det blir fel i programmet när spelet försöker interagera med celler som inte finns.
 
-✏️ Uppdatera funktionen `draw()` och testkör. Vad händer när du pekar innanför och utanför spelplanen med muspekaren?
+För att undvika detta måste vi begränsa koordinaterna. Om det valda X- eller Y-värdet blir större än rutnätets maxstorlek sätter vi värdet till den sista tillåtna indexplatsen (`gridXCount - 1` respektive `gridYCount - 1`). Om värdet blir negativt (till exempel om musen dras utanför till vänster) sätter vi det till noll.
 
-📝 Så här ser funktionen `draw()` ut nu:
+Vi använder funktionen `constrain(värde, min, max)`. Läs mer [här](https://p5js.org/reference/p5/constrain/).
 
-TODO: This code is incomplete
+✏️ Uppdatera `draw()`-funktionen med `if`-satserna nedan och testkör. Vad händer nu när du pekar innanför och utanför spelplanen?
+
+📝 Så här ser koden ut nu:
 
 ```javascript
+// Variablerna ligger kvar högst upp
+let cellSize = 24;
+let gridXCount = 19;
+let gridYCount = 14;
+let selectedX = 0;
+let selectedY = 0;
+
+function setup() {
+  createCanvas(gridXCount * cellSize, gridYCount * cellSize);
+  textAlign(CENTER, CENTER);
+  textSize(18);
+}
+
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
 function draw() {
   background(235);
 
+  // Begränsa så att vi inte väljer celler utanför rutnätet 🌻
   selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
   selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
 
@@ -185,13 +223,18 @@ function draw() {
       drawCellSymbol('⬜', x, y, 30);
     }
   }
+
+  // Tillfälligt
+  fill(0);
+  textSize(12);
+  text(`x: ${selectedX} y: ${selectedY}`, 44, 12);
+  textSize(18);
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451363-15f4d3b2-c3f1-4187-9d11-949fd2691b7d.png)
 
 ## Markera celler
-Vi visar markerad ruta med en annan symbol. Uppdatera funktionen `draw()` så att den blir så här.
+Vi visar rutan som musen pekar på med en annan symbol. Uppdatera funktionen `draw()` så att den blir så här.
 
 ```javascript
 function draw() {
@@ -216,6 +259,8 @@ function draw() {
 
 ## Ändra cellens utseende när vänster musknapp klickas
 När vänster musknapp hålls nere visar vi rutan som avtäckt. Uppdatera `draw()` och testkör.
+
+När du håller musknappen nere ska den bli gul. Så fort du släpper knappen går den tillbaks till orange.
 
 ```javascript
 function draw() {
@@ -245,7 +290,7 @@ function draw() {
 ## Rita blommor
 Nu skapar vi rutnätet.
 
-Uppdatera och testkör.
+Uppdatera och testkör. Jämför kodraderna för att se vad som har ändrat sig.
 
 ```javascript
 let grid = [];
@@ -297,9 +342,19 @@ function draw() {
 
 
 ## Förenkla koden
-Vi gör hjälpfunktioner för att slippa onödiga upprepningar. 
+Vi gör hjälpfunktioner för att slippa onödiga upprepningar. Namnen gör det lättare att förstå vad koden gör.
+
+Lägg till de här funktionerna efter funktionen `drawCellSymbol()`.
+
 
 ```javascript
+function drawCellSymbol(symbol, x, y, col = 20) {
+  fill(col);
+  noStroke();
+  text(symbol, x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
+}
+
+// Tre nya funktioner att lägga till
 function drawCovered(x, y) {
   drawCellSymbol('⬜', x, y, 30);
 }
@@ -314,14 +369,22 @@ function drawUncovered(x, y) {
 ```
 
 ## Växla blommor
-Tillfälligt test: högerklick växlar blomma.
+Vi testar att göra så att högerklick växlar blomma.
 
-Lägg till funktionen `mouseReleased()` och testa.
+Uppdatera `setup()` och lägg till funktionen `mouseReleased()` och testa.
+>Den lite krångliga koden i `addEventListener()` i `setup()` gör att vi slipper se den vanliga högerklicksmenyn i webbläsaren. Det är `preventDefault()`.
 
 ```javascript
-  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize);
-  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault());
+function setup() {
+  let canvas = createCanvas(gridXCount * cellSize, gridYCount * cellSize); // ändrad
+  canvas.elt.addEventListener("contextmenu", (e) => e.preventDefault()); // ny
+  textAlign(CENTER, CENTER);
+  textSize(18);
+}
 
+// ...
+
+// ny funktion för musklick
 function mouseReleased() {
   if (mouseButton === RIGHT) {
     grid[selectedY][selectedX].flower = !grid[selectedY][selectedX].flower;
@@ -330,6 +393,7 @@ function mouseReleased() {
 }
 ```
 
+
 ## Visa antalet blommor runt cellen
 Vi räknar blomgrannar.
 
@@ -337,8 +401,8 @@ Vi räknar blomgrannar.
 function getSurroundingFlowerCount(x, y) {
   let count = 0;
 
-  for (let dy = -1; dy <= 1; dy++) {
-    for (let dx = -1; dx <= 1; dx++) {
+  for (let dy = -1; dy <= 1; dy++) { // en ruta ovanför resp. under varje
+    for (let dx = -1; dx <= 1; dx++) { // en rutan till vänster resp. till höger
       if (
         !(dx === 0 && dy === 0) &&
         y + dy >= 0 && y + dy < grid.length &&
@@ -388,7 +452,8 @@ function plantFlowersRandomly() {
 ## Återställa spelet
 
 Vi gör en funktion som heter `reset()`. Den ska ställa in spelets startläge. 
-Nästan all kod som just nu ligger längst ner under `# Kod för att starta appen` flyttar vi dit.
+
+Nästan all kod som just nu ligger längst ner under `# Kod för att starta appen` flyttar vi dit. #TODO: This is wrong
 
 `reset()` anropas innan spelet börjar och när någon knapp trycks ned.
 
@@ -444,19 +509,19 @@ function mouseReleased() {
 
 En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner som ska avtäckas att läggas till i denna lista.
 
-För närvarande kommer denna "avtäckningsstack" bara att innehålla den valda positionen, så den kommer bara att avtäcka den valda cellen som tidigare.
+För närvarande kommer denna "avtäckningslista" bara att innehålla den valda positionen, så den kommer bara att avtäcka den valda cellen som tidigare.
 
-Så länge det finns positioner i avtäckningsstacken, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
+Så länge det finns positioner i avtäckningslistan, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
 
 ✏️ Uppdatera hela funktionen `mouseReleased`. Testkör vad som händer när du klickar på olika ställen i rutnätet!
 
 ```javascript
 function mouseReleased() {
   if (mouseButton === LEFT) {
-    const stack = [{ x: selectedX, y: selectedY }];
+    const lista = [{ x: selectedX, y: selectedY }];
 
-    while (stack.length > 0) {
-      const current = stack.pop();
+    while (lista.length > 0) {
+      const current = lista.pop();
       const x = current.x;
       const y = current.y;
 
@@ -467,7 +532,7 @@ function mouseReleased() {
 }
 ```
 
-## Lägg till fler celler på stacken
+## Lägg till fler celler på listan
 
 ```javascript
 if (getSurroundingFlowerCount(x, y) === 0) {
@@ -479,7 +544,7 @@ if (getSurroundingFlowerCount(x, y) === 0) {
         x + dx >= 0 && x + dx < grid[y + dy].length &&
         grid[y + dy][x + dx].state === 'covered'
       ) {
-        stack.push({ x: x + dx, y: y + dy });
+        lista.push({ x: x + dx, y: y + dy });
       }
     }
   }
@@ -562,7 +627,7 @@ if (mouseButton === LEFT && grid[selectedY][selectedX].state !== 'flag') {
 if (
   ['covered', 'question'].includes(grid[y + dy][x + dx].state)
 ) {
-  stack.push({ x: x + dx, y: y + dy });
+  lista.push({ x: x + dx, y: y + dy });
 }
 ```
 
@@ -844,10 +909,10 @@ function mouseReleased() {
       grid[selectedY][selectedX].state = 'uncovered';
       gameOver = true;
     } else {
-      const stack = [{ x: selectedX, y: selectedY }];
+      const lista = [{ x: selectedX, y: selectedY }];
 
-      while (stack.length > 0) {
-        const current = stack.pop();
+      while (lista.length > 0) {
+        const current = lista.pop();
         const x = current.x;
         const y = current.y;
 
@@ -866,7 +931,7 @@ function mouseReleased() {
                 x + dx >= 0 && x + dx < grid[y + dy].length &&
                 ['covered', 'question'].includes(grid[y + dy][x + dx].state)
               ) {
-                stack.push({ x: x + dx, y: y + dy });
+                lista.push({ x: x + dx, y: y + dy });
               }
             }
           }
