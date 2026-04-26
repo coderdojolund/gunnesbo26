@@ -21,7 +21,8 @@ Vägen till ett färdigt projekt är en pusselbit i taget 🧩. Gör därför et
 Var det något i beskrivningen som var svårt att förstå? Ta med det i redovisningen. 📝
 
 ## Nytt projekt
-Gå till https://editor.p5.js och ta bort exempelkoden.
+Gå till Processing, https://editor.p5.js, och ta bort exempelkoden.
+>Du ska inte logga in på p5.js. Spara istället din kod i ett dokument på Google Drive mellan lektionerna.
 
 # Bakgrund
 ## Första steget
