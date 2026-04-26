@@ -4,12 +4,6 @@
 <img src="image-hela.png" width="400" title="Flowers">
 
 
-## TODO
-- Restore the descriptions -- they are incomplete
-- Update screenshots to reflect the p5.js version
-- Describe how to type the Unicode emojis and their names for searching
-
-
 ## Innehåll
 **[Regler](#regler)** [Kontroller](#kontroller)
 
@@ -19,7 +13,7 @@
   [Rita celler](#rita-celler)
   &bull; [Markera celler](#markera-celler)
   &bull; [Bara celler inom rutnätet ska gå att välja](#bara-celler-inom-rutnätet-ska-gå-att-välja)
-  &bull; [Markera celler](#markera-celler-1)
+  &bull; [Markera vald cell](#markera-vald-cell)
   &bull; [Ändra cellens utseende när vänster musknapp klickas](#ändra-cellens-utseende-när-vänster-musknapp-klickas)
   &bull; [Rita blommor](#rita-blommor)
   &bull; [Förenkla koden](#förenkla-koden)
@@ -55,7 +49,7 @@ Bygg spelet bit för bit.
 - Gå vidare först när det fungerar.
 
 Om något var svårt: skriv ner det till redovisningen. 📝
-- Samma om du ber om hjälp från generativt 🤖 AI: skriv ner frågan och en sammanfattning av svaret *med dina egna ord* i en mening. Ta med det i redovisningen. Det påverkar bedömningen och hjälper oss också att förbättra uppgiften.
+- Samma om du ber om hjälp från generativt 🤖 AI: skriv ner frågan och en sammanfattning av svaret *med dina egna ord* i en mening. Ta med det i redovisningen som en källa. Det påverkar bedömningen och hjälper oss också att förbättra uppgiften.
 
 
 # Regler
@@ -87,9 +81,24 @@ Vi använder ett rutnät. Varje ruta har ett objekt:
 - `state` (`covered`, `uncovered`, `flag`, `question`)
 
 Vi ritar med:
-- symboler för rutor: `⬜` = täckt, `🟧` = avtäckt)
+- symboler för rutor: `⬜` = täckt, `🟧` = markerad, `🟨` = avtäckt
 - emoji (`🌷`, `🚩`, `❓`)
 - siffror för antalet blomgrannar, `1` till `8`
+
+Vi jobbar steg för steg med samma idé som i originalet:
+- först rita rutnätet
+- sedan välja en ruta med musen
+- därefter lägga till tillstånd (täckt, avtäckt, flagga, frågetecken)
+- till sist bygga logiken som avtäcker flera rutor via en lista
+
+I koden finns informationen om en ruta på formen `grid[y][x]`.
+Det betyder rad först (`y`) och kolumn sedan (`x`).
+
+Målet i slutet är ett komplett spel där:
+- första vänsterklicket alltid är säkert
+- högerklick växlar markeringar
+- spelet går att vinna eller förlora
+- nästa klick startar om spelet
 
 ## Att skriva emoji
 På Chromebook kan du söka efter emoji genom att hålla ner skift + sök och trycka på mellanslagstangenten.
@@ -107,7 +116,7 @@ Sök på de här engelska namnen för att hitta rätt emoji till spelet:
 Vi börjar med att rita täckta rutor.
 
 Skriv in koden på Processing, https://editor.p5js.org. 
->Du ska inte logga in på p5.js. Kom ihåg att spara din kod på Google Drive.
+>Du ska inte logga in på p5.js. Spara din kod på Google Drive mellan lektionerna.
 
 ✏️ Testkör. Ser det ut som på bilden?
 
@@ -137,6 +146,9 @@ function draw() {
     }
   }
 }
+
+// Du kan skriva kommentarer i koden med dubbla snedstreck i början
+// Det är bra för redovisningen om du gör egna förbättringar
 ```
 
 <img src="image0.png" width="400" title="Rita celler">
@@ -185,9 +197,9 @@ Om muspekaren rör sig utanför spelplanens kanter kan variablerna `selectedX` o
 
 För att undvika detta måste vi begränsa koordinaterna. Om det valda X- eller Y-värdet blir större än rutnätets maxstorlek sätter vi värdet till den sista tillåtna indexplatsen (`gridXCount - 1` respektive `gridYCount - 1`). Om värdet blir negativt (till exempel om musen dras utanför till vänster) sätter vi det till noll.
 
-Vi använder funktionen `constrain(värde, min, max)`. Läs mer [här](https://p5js.org/reference/p5/constrain/).
+Vi använder funktionen `constrain(värde, min, max)`. Den kollar `värde` så att det alltid är inom gränserna `min` och `max`. Läs mer [här](https://p5js.org/reference/p5/constrain/).
 
-✏️ Uppdatera `draw()`-funktionen med `if`-satserna nedan och testkör. Vad händer nu när du pekar innanför och utanför spelplanen?
+✏️ Uppdatera `draw()`-funktionen med `constrain(...)`-raderna nedan och testkör. Vad händer nu när du pekar innanför och utanför spelplanen?
 
 📝 Så här ser koden ut nu:
 
@@ -214,7 +226,7 @@ function drawCellSymbol(symbol, x, y, col = 20) {
 function draw() {
   background(235);
 
-  // Begränsa så att vi inte väljer celler utanför rutnätet 🌻
+  // Begränsa så att vi inte kan välja celler utanför rutnätet 🌻
   selectedX = constrain(floor(mouseX / cellSize), 0, gridXCount - 1);
   selectedY = constrain(floor(mouseY / cellSize), 0, gridYCount - 1);
 
@@ -233,7 +245,7 @@ function draw() {
 ```
 
 
-## Markera celler
+## Markera vald cell
 Vi visar rutan som musen pekar på med en annan symbol. Uppdatera funktionen `draw()` så att den blir så här.
 
 ```javascript
@@ -255,7 +267,10 @@ function draw() {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451429-c6b5e111-f945-47a4-bfe6-5005c372f603.png)
+<img src="image-markera-vald-cell.png" width="400" title="Markera vald cell">
+
+TODO: 📝 Så här ser hela koden ut nu
+
 
 ## Ändra cellens utseende när vänster musknapp klickas
 När vänster musknapp hålls nere visar vi rutan som avtäckt. Uppdatera `draw()` och testkör.
@@ -285,14 +300,30 @@ function draw() {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451476-56697739-2fbd-436c-8baa-06d9e22be4ad.png)
+TODO: 📝 Så här ser hela koden ut nu
+
 
 ## Rita blommor
-Nu skapar vi rutnätet.
+Nu skapar vi en variabel för att hålla reda på läget i varje cell.
 
-Uppdatera och testkör. Jämför kodraderna för att se vad som har ändrat sig.
+Varje cell i rutnätet kommer att representeras av ett objekt som lagrar två värden: om den har en blomma och om den är avtäckt/flaggad/frågemarkerad/ingenting.
+
+För närvarande kommer rutnätet det bara att lagra blomvärdet.
+
+Om en cells "flower"-nyckel är sann, ritas just nu blombilden över cellbilden. Vi kommer att ändra det sen så klart 🙂 
+
+Det är den här koden som ställer frågan:
+```javascript
+      if (grid[y][x].flower) { 
+        // vad ska hända när där är en blomma ...
+      }
+```
+
+✏️ Uppdatera och testkör. Jämför kodraderna för att se vad som ska ändras.
 
 ```javascript
+// ...
+let selectedY = 0;
 let grid = [];
 
 function setup() {
@@ -311,6 +342,8 @@ function setup() {
   grid[0][0].flower = true;
   grid[0][1].flower = true;
 }
+
+// ...
 
 function draw() {
   background(235);
@@ -338,13 +371,17 @@ function draw() {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451517-df57e52b-abe0-4c91-b75c-fd350bc0ef44.png)
+TODO: 📝 Så här ser hela koden ut nu
+
+![image](image-rita-blommor.png)
 
 
 ## Förenkla koden
 Vi gör hjälpfunktioner för att slippa onödiga upprepningar. Namnen gör det lättare att förstå vad koden gör.
 
-Lägg till de här funktionerna efter funktionen `drawCellSymbol()`.
+Efter ändringen ska spelet se ut och fungera som innan.
+
+✏️ Lägg till de här funktionerna efter funktionen `drawCellSymbol()`. Testkör!
 
 
 ```javascript
@@ -368,11 +405,14 @@ function drawUncovered(x, y) {
 }
 ```
 
+TODO: 📝 Så här ser hela koden ut nu
+
+
 ## Växla blommor
 Vi testar att göra så att högerklick växlar blomma.
 
 Uppdatera `setup()` och lägg till funktionen `mouseReleased()` och testa.
->Den lite krångliga koden i `addEventListener()` i `setup()` gör att vi slipper se den vanliga högerklicksmenyn i webbläsaren. Det är `preventDefault()`.
+>Den lite krångliga koden i `addEventListener()` i `setup()` behövs för att stänga av webbläsarens vanliga högerklicksmeny. Då fungerar högerklick i spelet som vi vill. Är du nyfiken varför? Testa utan och se vad som händer vid högerklick.
 
 ```javascript
 function setup() {
@@ -392,10 +432,17 @@ function mouseReleased() {
   return false;
 }
 ```
+TODO: 📝 Så här ser hela koden ut nu
 
 
 ## Visa antalet blommor runt cellen
 Vi räknar blomgrannar.
+
+- Vi går igenom de maximalt åtta grannrutorna runt varje ruta.
+- Om en granne finns inom rutnätet och innehåller en blomma ökar räknaren med 1.
+- Sen kan vi rita siffran i rutan.
+
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ```javascript
 function getSurroundingFlowerCount(x, y) {
@@ -422,11 +469,14 @@ function drawNumber(x, y, value) {
   text(String(value), x * cellSize + cellSize / 2, y * cellSize + cellSize / 2 + 1);
 }
 ```
-
-![image](https://user-images.githubusercontent.com/4598641/226451615-217a10c0-cf61-41f0-80fd-df17ef8c238e.png)
+TODO: This code does not draw the number -- the draw function needs updating as well.
 
 
 ## Slumpa blomplanteringen
+
+Nu ersätter vi testblommorna med slumpad plantering.
+Vi bygger en lista med alla möjliga positioner och tar sedan ut 40 slumpmässiga positioner.
+På så sätt kan samma ruta inte få mer än en blomma.
 
 ```javascript
 function plantFlowersRandomly() {
@@ -446,14 +496,13 @@ function plantFlowersRandomly() {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451656-7aac2925-cd35-488f-a397-0a2efc8d269b.png)
-
 
 ## Återställa spelet
 
 Vi gör en funktion som heter `reset()`. Den ska ställa in spelets startläge. 
 
-Nästan all kod som just nu ligger längst ner under `# Kod för att starta appen` flyttar vi dit. #TODO: This is wrong
+Nu flyttar vi kod för att skapa ett nytt tomt spel till `reset()`.
+Blommorna kommer vi i ett senare steg att plantera först vid första vänsterklicket.
 
 `reset()` anropas innan spelet börjar och när någon knapp trycks ned.
 
@@ -494,6 +543,10 @@ function keyPressed() {
 
 ## Att avtäcka celler
 
+Nu börjar vi använda `state` i varje ruta.
+Vid vänsterklick sätter vi den valda rutan till `uncovered`.
+Det är första steget innan vi bygger automatisk avtäckning av fler rutor.
+
 ```javascript
 function mouseReleased() {
   if (mouseButton === LEFT) {
@@ -503,7 +556,6 @@ function mouseReleased() {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451742-496e7414-d3d4-4be4-b251-df824a393c09.png)
 
 ## En lista som sparar celler som ska avtäckas
 
@@ -512,6 +564,8 @@ En lista över cellpositioner skapas. Så småningom kommer alla cellpositioner 
 För närvarande kommer denna "avtäckningslista" bara att innehålla den valda positionen, så den kommer bara att avtäcka den valda cellen som tidigare.
 
 Så länge det finns positioner i avtäckningslistan, tas en position bort från den och cellen vid denna position på rutnätet avtäcks.
+
+Här beter sig listan som en "senast in, först ut"-lista eftersom vi använder `pop()`.
 
 ✏️ Uppdatera hela funktionen `mouseReleased`. Testkör vad som händer när du klickar på olika ställen i rutnätet!
 
@@ -534,6 +588,10 @@ function mouseReleased() {
 
 ## Lägg till fler celler på listan
 
+Nu lägger vi även till grannar när en ruta saknar blomgrannar.
+I detta steg kommer ofta väldigt många rutor att avtäckas.
+Det är väntat just nu och vi förbättrar logiken i nästa steg.
+
 ```javascript
 if (getSurroundingFlowerCount(x, y) === 0) {
   for (let dy = -1; dy <= 1; dy++) {
@@ -550,20 +608,23 @@ if (getSurroundingFlowerCount(x, y) === 0) {
   }
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
-![image](https://user-images.githubusercontent.com/4598641/226451814-b25ebd8c-a36b-445d-9512-a291112a56f4.png)
 
 
 ## Ta hänsyn till antalet grannblommor när vi avtäcker
 Använd funktionen `getSurroundingFlowerCount(x, y)` både vid klick och ritning.
+
+Nu stoppar vi den stora kedjan när en ruta har blomgrannar.
+Det gör att avtäckningen uppför sig mer som i färdiga spelet.
 
 ```javascript
 if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
   drawNumber(x, y, getSurroundingFlowerCount(x, y));
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
-![image](https://user-images.githubusercontent.com/4598641/226451877-3422c1a8-a0ff-49d3-8df1-f46e50c52424.png)
 
 ## Rita flaggor och frågetecken
 
@@ -583,11 +644,12 @@ if (grid[y][x].state === 'flag') {
 }
 ```
 
-![image](https://user-images.githubusercontent.com/4598641/226451916-0675c6bd-8039-4926-b164-3cf556ff3a08.png)
-
 ## Byta cellens status mellan blank, flagga och frågetecken
 
 När man högerklickar på en cell ska statusen ändras mellan blank, flagga och frågetecken.
+
+Vi gör det som en enkel cykel:
+`covered -> flag -> question -> covered`.
 
 ✏️ Uppdatera koden. Testkör och se om det fungerar att byta statusen på några olika celler!
 
@@ -615,13 +677,20 @@ function setup() {
 
 ## Hindra att flaggade celler avtäcks
 
+En flagga ska skydda en ruta mot vänsterklick.
+Vi lägger därför till ett extra villkor i klickkoden.
+
 ```javascript
 if (mouseButton === LEFT && grid[selectedY][selectedX].state !== 'flag') {
   // avtäckningskod
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Celler med frågetecken får avtäckas
+
+Frågetecken är bara en markering för spelaren.
+De ska fortfarande kunna avtäckas automatiskt.
 
 ```javascript
 if (
@@ -630,8 +699,12 @@ if (
   lista.push({ x: x + dx, y: y + dy });
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Ändra grafiken när vänster musknapp klickar på en flaggad cell
+
+Om spelaren håller vänster musknapp på en flaggad ruta ska rutan fortfarande se täckt ut.
+Det ger tydlig visuell feedback att flaggan blockerar avtäckning.
 
 ```javascript
 if (x === selectedX && y === selectedY && !gameOver) {
@@ -646,8 +719,13 @@ if (x === selectedX && y === selectedY && !gameOver) {
   }
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Slut på spelet
+
+Nu inför vi `gameOver`.
+Om spelaren klickar på en blomma avslutas spelet direkt.
+Efter det ska vanliga klick inte fortsätta spelet.
 
 ```javascript
 if (gameOver) {
@@ -659,8 +737,12 @@ if (grid[selectedY][selectedX].flower) {
   gameOver = true;
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Att vinna spelet
+
+Efter varje avtäckning kontrollerar vi om alla säkra rutor är avtäckta.
+Om inga säkra rutor är kvar att öppna, så vinner spelaren.
 
 ```javascript
 let complete = true;
@@ -677,8 +759,12 @@ if (complete) {
   gameOver = true;
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Nytt spel vid nästa klick
+
+När `gameOver` är sant återställer vi spelet vid nästa musklick.
+Det gör det snabbt att börja om utan extra meny.
 
 ```javascript
 if (gameOver) {
@@ -686,28 +772,40 @@ if (gameOver) {
   return false;
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Sluta markera celler när spelet är slut
+
+För tydlighet stänger vi av markering av vald ruta när spelet är slut.
+Det signalerar att rundan är avslutad.
 
 ```javascript
 if (x === selectedX && y === selectedY && !gameOver) {
   drawHighlighted(x, y);
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
 ## Göm blommorna tills spelet är slut
+
+Blommorna visas först när spelet är slut.
+Under spelets gång syns de inte, vilket gör att man måste använda logik.
 
 ```javascript
 if (grid[y][x].flower && gameOver) {
   drawCellSymbol('🌷', x, y, 20);
 }
 ```
+✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
-![image](https://user-images.githubusercontent.com/4598641/226452171-3df8c25a-b72c-4d16-9ff4-c654bb0e6db3.png)
+
 
 
 ## Göm antalet blomgrannar för täckta celler
 Om en cell är täckt, ska vi inte visa antalet grannceller med blommor.
+
+Det gör spelet rättvist: du får bara information om rutor du faktiskt har avtäckt.
+Annars skulle siffrorna avslöja för mycket av spelplanen.
 
 ✏️ Uppdatera koden. Testkör och se om det fungerar på rätt sätt!
 
@@ -718,7 +816,7 @@ if (getSurroundingFlowerCount(x, y) > 0 && grid[y][x].state === 'uncovered') {
 ```
 
 ## Hindra att man klickar på en blomma vid första klicket
-![image](https://user-images.githubusercontent.com/4598641/226452196-f8755175-df82-4650-be3a-73491516082d.png)
+
 
 Plantera blommor först efter första vänsterklick.
 
@@ -730,6 +828,9 @@ Blomplanteringen får en egen funktion, `plantFlowersAvoiding(x, y)` där en del
 Den första cellen vi klickade på får då ingen blomma.
 
 Vi skapar en variabel för att hålla reda på om ett klick är det första klicket i spelet.
+
+Bra test: starta om spelet flera gånger och vänsterklicka direkt på olika rutor.
+Den första rutan ska aldrig innehålla en blomma.
 
 ✏️ Uppdatera koden och testkör! Fungerar spelet som du tänker dig nu?
 
