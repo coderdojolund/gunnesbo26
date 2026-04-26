@@ -1,4 +1,3 @@
-
 # Eyes ⭐⭐
 ![image](https://user-images.githubusercontent.com/4598641/223815678-2c97174e-578c-4df4-9f8a-d8764f0b2424.png)
 
@@ -53,6 +52,7 @@ function draw() {
 ```
 
 ✏️ Gå till https://editor.p5js.org/ för att mata in koden. 
+>Du ska inte logga in på p5.js. Spara istället din kod i ett dokument på Google Drive mellan lektionerna.
 
 Provkör din kod innan du går vidare. Den behöver fungera innan du fortsätter.
 
