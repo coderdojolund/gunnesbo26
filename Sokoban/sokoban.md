@@ -843,7 +843,6 @@ function keyPressed() {
     // Hämtar celltyper (nytt 🔲)
     let current = level[player_y][player_x];
     let adjacent = level[player_y + dy][player_x + dx];
-    console.log("Hej");
 
     if (current === player && adjacent === empty) {
       level[player_y][player_x] = empty;
@@ -898,127 +897,60 @@ Just nu kan spelaren gå till en lagerplats, men inte lämna den. Vi ska fixa de
 
 ✏️ Uppdatera koden i `keyPressed()`. Vad händer när spelaren går till en lagerplats?
 
-TODO: Pick up here
+```javascript
+function keyPressed() {
+  if (keyCode === UP_ARROW || keyCode === DOWN_ARROW || keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW) {
 
-```python
-def on_key_down(key):
-   # etc.
+    let player_x;
+    let player_y;
 
-        current = level[player_y][player_x]
-        adjacent = level[player_y + dy][player_x + dx]
+    // Hittar spelarens position
+    for (let test_y = 0; test_y < level.length; test_y++) {
+      for (let test_x = 0; test_x < level[test_y].length; test_x++) {
+        let cell = level[test_y][test_x];
+        if (cell === player || cell === player_on_storage) {
+          player_x = test_x;
+          player_y = test_y;
+        }
+      }
+    }
 
-        if current == player:
-            if adjacent == empty: #nytt 🔲
-                level[player_y][player_x] = empty
-                level[player_y + dy][player_x + dx] = player
-            elif adjacent == storage: #nytt 🔲
-                level[player_y][player_x] = empty #nytt 🔲
-                level[player_y + dy][player_x + dx] = player_on_storage #nytt 🔲
+    // Sätter rörelseriktning (nytt 🔲)
+    let dx = 0;
+    let dy = 0;
+
+    if (keyCode === LEFT_ARROW) {
+      dx = -1;
+    } else if (keyCode === RIGHT_ARROW) {
+      dx = 1;
+    } else if (keyCode === UP_ARROW) {
+      dy = -1;
+    } else if (keyCode === DOWN_ARROW) {
+      dy = 1;
+    }
+
+    // Hämtar celltyper (nytt 🔲)
+    let current = level[player_y][player_x];
+    let adjacent = level[player_y + dy][player_x + dx];
+
+    if (current === player) {
+      if (adjacent === empty) { //nytt 🔲
+        level[player_y][player_x] = empty;
+        level[player_y + dy][player_x + dx] = player;
+      } else if (adjacent === storage) { //nytt 🔲
+        level[player_y][player_x] = empty; //nytt 🔲
+        level[player_y + dy][player_x + dx] = player_on_storage; //nytt 🔲
+      }
+    }
+  }
+}
 ```
-
-<details>
-  <summary>📝 Så här ser hela koden ut nu</summary>
-  
-```python
-import pgzrun
-
-# Globala variabler här nedanför
-level = [
-    ["#", "#", "#", "#", "#"],
-    ["#", "@", " ", ".", "#"],
-    ["#", " ", "$", " ", "#"],
-    ["#", ".", "$", " ", "#"],
-    ["#", " ", "$", ".", "#"],
-    ["#", ".", "$", ".", "#"],
-    ["#", ".", "*", " ", "#"],
-    ["#", " ", "*", ".", "#"],
-    ["#", " ", "*", " ", "#"],
-    ["#", ".", "*", ".", "#"],
-    ["#", "#", "#", "#", "#"],
-]
-
-player = "@"
-player_on_storage = "+"
-box = "$"
-box_on_storage = "*"
-storage = "."
-wall = "#"
-empty = " "
-
-# Funktioner här nedanför
-
-
-def on_key_down(key):
-    if key in (keys.UP, keys.DOWN, keys.LEFT, keys.RIGHT):
-        for test_y, row in enumerate(level):
-            for test_x, cell in enumerate(row):
-                if cell == player or cell == player_on_storage:
-                    player_x = test_x
-                    player_y = test_y
-
-        dx = 0
-        dy = 0
-        if key == keys.LEFT:
-            dx = -1
-        elif key == keys.RIGHT:
-            dx = 1
-        elif key == keys.UP:
-            dy = -1
-        elif key == keys.DOWN:
-            dy = 1
-
-        current = level[player_y][player_x]
-        adjacent = level[player_y + dy][player_x + dx]
-
-        if current == player:
-            if adjacent == empty:
-                level[player_y][player_x] = empty
-                level[player_y + dy][player_x + dx] = player
-            elif adjacent == storage:
-                level[player_y][player_x] = empty
-                level[player_y + dy][player_x + dx] = player_on_storage
-
-
-def draw():
-    screen.fill((255, 255, 190))
-
-    for y, row in enumerate(level):
-        for x, cell in enumerate(row):
-            if cell != empty:
-                cell_size = 23
-
-                colors = {
-                    player: (167, 135, 255),
-                    player_on_storage: (158, 119, 255),
-                    box: (255, 201, 126),
-                    box_on_storage: (150, 255, 127),
-                    storage: (156, 229, 255),
-                    wall: (255, 147, 209),
-                }
-
-                screen.draw.filled_rect(
-                    Rect((x * cell_size, y * cell_size), (cell_size, cell_size)),
-                    color=colors[cell],
-                )
-
-                screen.draw.text(
-                    cell, (x * cell_size, y * cell_size), color=(255, 255, 255)
-                )
-
-
-# Kod för att starta appen här nedanför
-
-pgzrun.go()  # måste vara sista raden
-
-```
-
-</details>
 
 ![image](https://user-images.githubusercontent.com/4598641/226442060-dddc88af-c52b-4d75-bafc-d202d9069ae1.png)
 
 ## Förenkla koden
-Den nya grannrutan &ndash; antingen `player` eller `player_on_storage` &ndash; ställs in baserat på typen av `adjacent`.
-Därför skapar vi en ordlista där vi kan slå upp granncellens nya typ när vi vet vilken typ granncellen har just nu.
+Vi ställer in den nya grannrutan &ndash; antingen `player` eller `player_on_storage` &ndash; baserat på typen av `adjacent`.
+Därför skapar vi en lista där vi kan slå upp granncellens nya typ när vi vet vilken typ granncellen har just nu.
 
 Den används också för att kontrollera om spelaren kan flytta till den granncellen genom att kontrollera om den har en nyckel med värdet `adjacent`.
 
